@@ -1,0 +1,65 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "jsx": "react",
+    "moduleDetection": "force",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "outDir": "./dist/",
+    "moduleResolution": "classic",
+    "composite": false,
+    "incremental": false,
+    "tsBuildInfoFile": null,
+    "checkJs": true,
+    "declaration": false,
+    "inlineSourceMap": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "rootDirs": [
+      "./"
+    ],
+    "paths": {
+      "/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "./**/*.ts*"
+  ],
+  "typeRoots": [
+    "./types/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "private",
+    "archive",
+    "*backup",
+    "dist",
+    ".old*",
+    ".OLD*",
+    "#OLD*",
+    "@OLD*",
+  ]
+}

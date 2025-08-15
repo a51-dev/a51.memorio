@@ -1,0 +1,15 @@
+# dependencies
+/node_modules
+
+# custom
+.private
+.backup
+
+**/*OLD
+**/*old
+
+# testing
+/coverage
+
+# production
+/build

@@ -1,0 +1,8 @@
+test/
+tmp/
+*.OLD/
+*.bak
+*.lnk
+*.backup/*
+src/
+documents/

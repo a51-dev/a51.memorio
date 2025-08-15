@@ -1,0 +1,90 @@
+{
+  "npm.exclude": [
+    "**/dist",
+    "**/out"
+  ],
+  "editor.quickSuggestionsDelay": 2000,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+  },
+  "editor.largeFileOptimizations": true,
+  "editor.formatOnType": true,
+  "editor.unicodeHighlight.invisibleCharacters": true,
+  "editor.unicodeHighlight.ambiguousCharacters": true,
+  "editor.unicodeHighlight.nonBasicASCII": true,
+  "editor.hover.enabled": true,
+  "editor.hover.delay": 2000,
+  "editor.codeLens": false,
+  "editor.tabCompletion": "off",
+  "editor.renderWhitespace": "all",
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.formatOnSave": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingOvertype": "always",
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.bracketPairColorization.enabled": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "javascript.format.semicolons": "remove",
+  "typescript.format.semicolons": "remove",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.suggestionActions.enabled": false,
+  "javascript.suggestionActions.enabled": false,
+  "explorer.compactFolders": false,
+  "workbench.editor.limit.excludeDirty": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.limit.value": 10,
+  "workbench.colorCustomizations": {
+    "editorBracketHighlight.foreground1": "#ffffff",
+    "editorBracketHighlight.foreground2": "#d8d0a4",
+    "editorBracketHighlight.foreground3": "#b46b6b",
+    "editorUnicodeHighlight.border": "#00ff37",
+    "editorUnicodeHighlight.background": "#f00",
+    "minimap.unicodeHighlight": "#ff0000"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "html"
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "[*]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.foldingStrategy": "indentation"
+  },
+  "search.exclude": {
+    ".editorconfig": true,
+    "**/.cache": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.svg": true,
+    "**/.xml": true,
+    "**/bower_components": true,
+    "**/node_*": true,
+    "**/tmp": true,
+    "babel.config.js": true,
+    "node_modules": true,
+    "package-lock.json": true,
+    "**/dist": true,
+    "**/node_modules": true,
+  },
+  "files.exclude": {
+    ".backup": true,
+    ".archive": true,
+    "@OLD": true,
+    "#OLD": true,
+    "coverage": true,
+    "**/**/cmd.exe.lnk": true
+  },
+  "cSpell.words": [
+    "memorio"
+  ]
+}
