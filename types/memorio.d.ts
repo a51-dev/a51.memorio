@@ -1,5 +1,11 @@
 
-interface memorio { }
+interface _memorio {
+  setProps: any,
+  obj: any,
+  array: any,
+  dispatch: any,
+  setDescription: any
+}
 
 declare var memorio: _memorio
 type memorio = _memorio
