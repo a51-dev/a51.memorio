@@ -11,8 +11,7 @@ export default defineConfig([
       '**/coverage/**',
       '**/assets/**',
       '**/types/*.d.ts',
-      '**/*.min.js',
-      '**/documents/**'
+      '**/*.min.js'
     ]
   },
   // Base configuration for all files
