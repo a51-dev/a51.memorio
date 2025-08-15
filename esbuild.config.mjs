@@ -28,7 +28,7 @@ esbuild.build(
               to: './types'
             },
             {
-              from: 'src/documents/**/*',
+              from: '.github/**/*',
               to: './'
             },
             {
