@@ -151,7 +151,8 @@ Object.defineProperties(
   {
     list: {
       get() {
-        return memorio.array.deepClone(state)
+        const clone = memorio.array.deepClone(state)
+        return console.log(clone)
       }
     },
 
