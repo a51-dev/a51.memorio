@@ -1,12 +1,12 @@
 {
   "name": "memorio",
-  "version": "0.1.5",
-  "description": "memorio",
-  "copyright": "Dario Passariello",
+  "version": "0.1.8",
+  "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
   "deprecated": false,
   "preferGlobal": true,
   "target": "web",
+  "copyright": "Dario Passariello, BigLogic ca - a51.dev is a BigLogic project",
   "homepage": "https://a51.gitbook.io/memorio",
   "author": {
     "name": "Dario Passariello",
@@ -33,6 +33,8 @@
     "memorio": {}
   },
   "keywords": [
+    "biglogic",
+    "a51",
     "memorio",
     "state",
     "store",
