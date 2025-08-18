@@ -1,3 +1,312 @@
+const description = {
+  name: "array",
+  active: true,
+  subCommand: [
+    {
+      name: "find",
+      version: "0.0.1",
+      example: "memorio.array.find([array, item])",
+      description: "Find an item in the array.",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20240619",
+      type: "function",
+      active: true,
+      subCommand: []
+    },
+    {
+      name: "unique",
+      version: "0.0.1",
+      example: "memorio.array.unique([array])",
+      description: "Return a new array with unique items.",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      subCommand: []
+    },
+    {
+      name: "delete",
+      version: "0.0.1",
+      example: "memorio.array.delete([array, item])",
+      description: "Delete an item from the array.",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      subCommand: []
+    },
+    {
+      name: "merge",
+      version: "0.0.1",
+      example: "memorio.array.merge([array1, array2])",
+      description: "Merge two arrays into one.",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      subCommand: []
+    },
+    {
+      name: "mergeByKey",
+      version: "0.0.1",
+      example: "memorio.array.mergeByKey([arrayA, arrayB, key])",
+      author: "Dario Passariello",
+      creationDate: "20230603",
+      lastMod: "20230603",
+      type: "function",
+      active: true,
+      description: `
+                Example:
+                const array = [
+                  {"date":1230,"value":1},
+                  {"date":1231,"value":2},
+                  {"date":1232,"value":3, "value1":3, name:"John"},
+                  {"date":1233,"value":4},
+                  {"date":1234,"value":5},
+                  {"date":1235,"value":6}
+                ]
+                const newData = [
+                  {"date":1230,"value":1000,'name':'Diana'},
+                  {"date":1232,"value":1000, "value1":20000},
+                  {"date":1234,"value":1000},
+                  {"date":1235,"value":888810000}
+                ]
+                Command: memorio.array.mergeByKey( array, newData, 'date' )
+                Result:
+                [
+                  {"date": 1230,"value": 1000, name: "Diana" },
+                  {"date": 1231,"value": 2},
+                  {"date": 1232 "value": 1000, "value1": 20000, name: "John" },
+                  {"date": 1233,"value": 4},
+                  {"date": 1234, "value": 1000},
+                  {"date": 1235,"value": 888810000}
+                ]
+        `,
+      subCommand: []
+    },
+    {
+      name: "asc",
+      version: "0.0.1",
+      example: "memorio.array.asc([array])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      description: "Sort an array in ascending order.",
+      subCommand: []
+    },
+    {
+      name: "desc",
+      version: "0.0.1",
+      example: "memorio.array.desc([array])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      description: "Sort an array in descending order.",
+      subCommand: []
+    },
+    {
+      name: "duplicates",
+      version: "0.0.1",
+      example: "memorio.array.duplicates([array])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      description: "Find duplicate items in an array.",
+      subCommand: []
+    },
+    {
+      name: "even",
+      version: "0.0.1",
+      example: "memorio.array.even([array])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      description: "Filter even numbers from an array.",
+      subCommand: []
+    },
+    {
+      name: "odd",
+      version: "0.0.1",
+      example: "memorio.array.odd([array])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20210101",
+      type: "function",
+      active: true,
+      description: "Filter odd numbers from an array.",
+      subCommand: []
+    },
+    {
+      name: "sumColumn",
+      version: "0.0.1",
+      example: "memorio.array.sumColumn([array, column])",
+      author: "Dario Passariello",
+      creationDate: "20210101",
+      lastMod: "20230111",
+      type: "function",
+      active: true,
+      description: `
+              Sum the values of a specified column in a multidimensional array.
+              Example:
+              const array = [
+                [12, 23, 34],
+                [45, 56, 67],
+                [78, 89, 90]
+              ]
+              console.debug(memorio.array.sumColumn(array, 0)) // Result: 135
+            `,
+      subCommand: []
+    },
+    {
+      name: "shuffle",
+      version: "0.0.1",
+      example: "memorio.array.shuffle([array])",
+      author: "Dario Passariello",
+      creationDate: "20230527",
+      lastMod: "20230527",
+      type: "function",
+      active: true,
+      description: "Shuffle the elements of an array.",
+      subCommand: []
+    },
+    {
+      name: "generate",
+      version: "0.0.1",
+      example: "memorio.array.generate(num)",
+      author: "Dario Passariello",
+      creationDate: "20230527",
+      lastMod: "20230527",
+      type: "function",
+      active: true,
+      description: "Generate an array of random numbers (max 500000).",
+      subCommand: []
+    },
+    {
+      name: "testArrayInt",
+      version: "0.0.1",
+      example: "memorio.array.testArrayInt([array])",
+      author: "Dario Passariello",
+      creationDate: "20230527",
+      lastMod: "20230527",
+      type: "function",
+      active: true,
+      description: `
+              Test if an array contains consecutive integers.
+              Examples:
+              console.debug(memorio.array.testArrayInt([1,2,3,4,6,7])) // Result: [5]
+            `,
+      subCommand: []
+    },
+    {
+      name: "rand32",
+      version: "0.0.1",
+      example: "memorio.array.rand32(num)",
+      author: "Dario Passariello",
+      creationDate: "20230527",
+      lastMod: "20230527",
+      type: "function",
+      active: true,
+      description: `
+              Generate an array of random 32-bit unsigned integers.
+              Example:
+              console.debug(memorio.array.rand32(500000))
+            `,
+      subCommand: []
+    },
+    {
+      name: "deepClone",
+      version: "0.0.1",
+      example: "memorio.array.deepClone(array|object)",
+      author: "Dario Passariello",
+      creationDate: "20250101",
+      lastMod: "20250101",
+      type: "function",
+      active: true,
+      description: `
+                Generate a deep clone of an array or object.
+                Example:
+                memorio.array.deepClone([array|object])
+              `,
+      subCommand: []
+    },
+    {
+      name: "match",
+      version: "0.0.1",
+      example: "memorio.array.match([arrayOfWords, arrayToCheck])",
+      author: "Dario Passariello",
+      creationDate: "20250101",
+      lastMod: "20250101",
+      type: "function",
+      active: true,
+      description: `
+              Find a perfect match between an array of words and an array to check.
+              Example:
+              memorio.array.match([arrayOfWords, arrayToCheck])
+            `,
+      subCommand: []
+    },
+    {
+      name: "shallow",
+      version: "0.0.1",
+      example: "memorio.array.shallow([array])",
+      author: "Dario Passariello",
+      creationDate: "20250101",
+      lastMod: "20250101",
+      type: "function",
+      active: true,
+      description: `
+              Generate a shallow copy of an array
+              Example: memorio.array.shallow([array])
+            `,
+      subCommand: []
+    },
+    {
+      name: "deepCopy",
+      version: "0.0.1",
+      example: "memorio.array.deepCopy([array])",
+      author: "Dario Passariello",
+      creationDate: "20250101",
+      lastMod: "20250101",
+      type: "function",
+      active: true,
+      description: `
+              Generate a deepCopy of an array
+              Example: memorio.array.deepCopy([array])
+            `,
+      subCommand: []
+    },
+    {
+      name: "groupBy",
+      version: "0.0.1",
+      example: "memorio.array.groupBy([array, key])",
+      author: "Dario Passariello",
+      creationDate: "20250414",
+      lastMod: "20250414",
+      type: "function",
+      active: true,
+      description: `
+              Generate groups of array by a specific key
+              Example: memorio.array.groupBy([array, key])
+            `,
+      subCommand: []
+    }
+  ]
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 const newObj = {
 
   /**
@@ -356,4 +665,4 @@ const newObj = {
 
 /////////////////////////////////////////////////////////
 
-global.memorio.setDescription({}, newObj)
+global.memorio.setDescription(description, newObj)

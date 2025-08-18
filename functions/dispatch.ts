@@ -1,3 +1,46 @@
+const description = {
+  name: 'dispatch',
+  active: true,
+  subCommand: [
+    {
+      name: 'set',
+      version: '0.0.1',
+      example: 'memorio.dispatch.set([name, value])',
+      author: 'Dario Passariello',
+      creationDate: '20231231',
+      lastMod: '20240612',
+      type: 'function',
+      active: true,
+      description: 'Dispatches a custom event with the specified name and value.',
+      subCommand: []
+    }, {
+      name: 'listen',
+      version: '0.0.1',
+      example: 'memorio.dispatch.listen([eventNames, callback=null], flag = true)',
+      author: 'Dario Passariello',
+      creationDate: '20231231',
+      lastMod: '20240612',
+      type: 'function',
+      active: true,
+      description: 'Listens for the specified event names and executes the callback when the event is triggered.',
+      subCommand: []
+    }, {
+      name: 'remove',
+      version: '0.0.1',
+      example: 'memorio.dispatch.remove([eventNames, callback=null], flag = true)',
+      author: 'Dario Passariello',
+      creationDate: '20231231',
+      lastMod: '20240612',
+      type: 'function',
+      active: true,
+      description: 'Removes the event listener for the specified event names.',
+      subCommand: []
+    }
+  ]
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 const newObj = {
 
   /**
@@ -41,4 +84,4 @@ const newObj = {
 
 // ************************************************
 
-global.memorio.setDescription({}, newObj)
+global.memorio.setDescription(description, newObj)
