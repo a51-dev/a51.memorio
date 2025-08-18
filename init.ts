@@ -1,12 +1,13 @@
-"use strict"
+///////////////////////////////////////////////////////////////////////////////
+// LOAD SCRIPTS
 
-import "src/config/global"
-import "src/config/setProps"
+require('./config/global')
+require('./config/setProps')
 
-import "src/functions/obj"
-import "src/functions/array"
-import "src/functions/dispatch"
+require('./config/array')
+require('./config/dispatch')
+require('./config/obj')
 
-import "src/store"
-import "src/state"
-import "src/observer"
+require('./functions/state')
+require('./functions/observer')
+require('./functions/store')
