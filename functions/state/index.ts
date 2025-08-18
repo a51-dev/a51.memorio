@@ -1,3 +1,18 @@
+Object.defineProperty(
+  memorio,
+  'objPath',
+  {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: (prop: string, object: string[], separator: string = '.'): string => {
+      return object.concat(prop).join(separator)
+    }
+  }
+)
+
+/////////////////////////////////////////////////////
+
 const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tree: string[] = []): any => {
 
   // EVENT FUNCTION FOR OBSERVER
@@ -40,7 +55,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
         try {
 
-          const path = global.memorio.obj.path(prop as string, tree)
+          const path = global.memorio.objPath(prop as string, tree)
 
           callback(
             {
@@ -94,7 +109,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
       deleteProperty(target: any, prop: string | symbol): boolean {
         try {
-          const path = global.memorio.obj.path(prop as string, tree)
+          const path = global.memorio.objPath(prop as string, tree)
           callback({ action: 'delete', path, target })
           return Reflect.deleteProperty(target, prop)
         } catch (error) {
