@@ -24,4 +24,13 @@ Object.defineProperty(
   }
 )
 
-global.memorio.version = p.version
+Object.defineProperty(
+  memorio,
+  'version',
+  {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: p.version
+  }
+)
