@@ -4,9 +4,9 @@
 require('./config/global')
 require('./config/setProps')
 
-require('./config/array')
-require('./config/dispatch')
-require('./config/obj')
+require('./functions/array')
+require('./functions/dispatch')
+require('./functions/obj')
 
 require('./functions/state')
 require('./functions/observer')
