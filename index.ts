@@ -1,3 +1,5 @@
 'use strict'
 
-import "./init"
+import Run from "./init"
+
+Run()
