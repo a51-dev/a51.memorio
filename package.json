@@ -1,6 +1,6 @@
 {
   "name": "memorio",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
   "deprecated": false,
@@ -65,6 +65,7 @@
     "-----------": "",
     "tsc": "tsc -b .",
     "eslint": "eslint .",
+    "updates": "npx npm-check-updates -u && npm i",
     "----------": "",
     "publish:npm": "npm run build && npm publish ./dist"
   },
