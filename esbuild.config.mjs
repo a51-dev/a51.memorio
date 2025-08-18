@@ -34,6 +34,10 @@ esbuild.build(
             {
               from: './package.json',
               to: './package.json'
+            },
+            {
+              from: './index.d.ts',
+              to: './index.d.ts'
             }
           ]
         }
