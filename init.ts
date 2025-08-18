@@ -1,15 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LOAD SCRIPTS
 
-export default () => {
+require('./config/global')
+require('./config/dispatch')
 
-  if (window.memorio) return
-
-  require('./config/global')
-  require('./config/dispatch')
-
-  require('./functions/state')
-  require('./functions/observer')
-  require('./functions/store')
-
-}
+require('./functions/state')
+require('./functions/observer')
+require('./functions/store')

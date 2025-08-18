@@ -1,6 +1,6 @@
 {
   "name": "memorio",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
   "deprecated": false,
