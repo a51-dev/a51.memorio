@@ -1,13 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 // LOAD SCRIPTS
 
-require('./config/global')
-require('./config/setProps')
+export default () => {
 
-require('./functions/array')
-require('./functions/dispatch')
-require('./functions/obj')
+  if (window.memorio) return
 
-require('./functions/state')
-require('./functions/observer')
-require('./functions/store')
+  require('./config/global')
+  require('./config/dispatch')
+
+  require('./functions/state')
+  require('./functions/observer')
+  require('./functions/store')
+
+}
