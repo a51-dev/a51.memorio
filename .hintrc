@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "development"
+  ],
+  "connector": {
+    "name": "connectorName"
+  },
+  "formatters": [],
+  "parsers": [],
+  "hints": {
+    "no-inline-styles": "off",
+    "axe/language": [
+      "default",
+      {
+        "html-has-lang": "off"
+      }
+    ],
+    "meta-viewport": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ],
+    "disown-opener": "off"
+  },
+  "hintsTimeout": 120000
+}
