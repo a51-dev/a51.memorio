@@ -1,4 +1,10 @@
 
+
+declare module 'memorio' {
+  const resource: { [key: string]: any }
+  export = resource
+}
+
 interface _memorio {
   setProps: any,
   obj: any,
@@ -7,16 +13,16 @@ interface _memorio {
   setDescription: any
 }
 
-declare var memorio: _memorio
 type memorio = _memorio
+declare var memorio: any
 
-declare var arguments: any
 type arguments = any
+declare var arguments: any
 
 /////////////////////////////////////////////
 
 interface Descr {
   name: string,
   active: boolean,
-  subCommand: Array<SubCommand>,
+  subCommand: object,
 }
