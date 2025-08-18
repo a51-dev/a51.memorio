@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "strict": true,
     "noEmit": false,
-    "noImplicitThis": false,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
     "importHelpers": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "noImplicitAny": false,
     "preserveConstEnums": true,
@@ -22,20 +27,8 @@
     "module": "CommonJS",
     "baseUrl": ".",
     "outDir": "./dist/",
-    "moduleResolution": "classic",
-    "composite": false,
-    "incremental": false,
-    "tsBuildInfoFile": null,
-    "checkJs": true,
-    "declaration": false,
-    "inlineSourceMap": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": false,
-    "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "target": "es2022",
+    "moduleResolution": "node",
     "rootDirs": [
       "./"
     ],
@@ -46,7 +39,11 @@
     }
   },
   "include": [
-    "./**/*.ts*"
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
+  "types": [
+    "node"
   ],
   "typeRoots": [
     "./types/*"

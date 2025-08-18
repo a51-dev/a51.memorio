@@ -1,6 +1,6 @@
 Object.defineProperty(
-  memorio,
-  "setProps",
+  global.memorio,
+  'setProps',
   {
     value: (root: any, desc: any, options: any) => {
       Object.defineProperty(
@@ -24,14 +24,14 @@ Object.defineProperty(
 
 // PROPERTY SETTER
 Object.defineProperty(
-  memorio,
-  "setDescription",
+  global.memorio,
+  'setDescription',
   {
     value: (description, obj) => {
 
       // set tool properties
       Object.defineProperties(
-        memorio,
+        global.memorio,
         {
           [description.name]: {
             value: obj,
@@ -46,7 +46,7 @@ Object.defineProperty(
       Object.keys(obj).forEach(function (key) {
         // set tool properties
         Object.defineProperties(
-          memorio[description.name],
+          global.memorio[description.name],
           {
             [key]: {
               writable: false,
@@ -58,8 +58,8 @@ Object.defineProperty(
       })
 
       // generate description
-      memorio.setProps(
-        memorio,
+      global.memorio.setProps(
+        global.memorio,
         description,
         {
           writable: false,

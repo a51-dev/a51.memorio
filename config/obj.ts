@@ -1,175 +1,3 @@
-
-const description: Descr = {
-  name: "obj",
-  active: true,
-  subCommand: [
-    {
-      name: "toArray",
-      version: "0.0.1",
-      example: "memorio.obj.toArray([obj])",
-      description: "Convert an object to an array.",
-      author: "Dario Passariello",
-      creationDate: "20210101",
-      lastMod: "20210101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "replaceNullObjects",
-      version: "0.0.1",
-      example: "memorio.obj.replaceNullObjects([obj])",
-      description: "Replace null values in an object with empty objects.",
-      author: "Dario Passariello",
-      creationDate: "20210101",
-      lastMod: "20210101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "serialize",
-      version: "0.0.1",
-      example: "memorio.obj.serialize([obj])",
-      description: "Serialize an object to a JSON string.",
-      author: "Dario Passariello",
-      creationDate: "20210101",
-      lastMod: "20210101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "deSerialize",
-      version: "0.0.1",
-      example: "memorio.obj.deSerialize([obj])",
-      description: "Deserialize a JSON string to an object.",
-      author: "Dario Passariello",
-      creationDate: "20210101",
-      lastMod: "20210101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "find",
-      version: "0.0.1",
-      example: "memorio.obj.find([array, key, value])",
-      description: "Find an object in an array by key and value.",
-      author: "Dario Passariello",
-      creationDate: "20210101",
-      lastMod: "20210101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "toXML",
-      version: "0.0.1",
-      example: "memorio.obj.toXML([obj])",
-      description: "Convert an object to an XML string.",
-      author: "Dario Passariello",
-      creationDate: "20240315",
-      lastMod: "20240315",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "instance",
-      version: "0.0.1",
-      example: "memorio.obj.instance([obj])",
-      description: "Create an instance of an object.",
-      author: "Dario Passariello",
-      creationDate: "20240924",
-      lastMod: "20240924",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "updateByKey",
-      version: "0.0.1",
-      example: "memorio.obj.updateByKey([obj, key, newValue])",
-      description: "Update an object's property by key.",
-      author: "Dario Passariello",
-      creationDate: "20240929",
-      lastMod: "20240929",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "findindex",
-      version: "0.0.1",
-      example: "memorio.obj.findindex([obj, key])",
-      description: "Find the index of an object in an array by key.",
-      author: "Dario Passariello",
-      creationDate: "20240929",
-      lastMod: "20240929",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "parse",
-      version: "0.0.1",
-      example: "memorio.obj.parse(val)",
-      description: "Check if value is an object or another type. Return object after parse or a different type. Used instead of JSON.parse to avoid crash.",
-      author: "Dario Passariello",
-      creationDate: "20241027",
-      lastMod: "20240927",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "diff",
-      version: "0.0.1",
-      example: "memorio.obj.diff([obj1, obj2])",
-      description: "Show the differences between two objects.",
-      author: "Dario Passariello",
-      creationDate: "20250101",
-      lastMod: "20250101",
-      type: "function",
-      active: true,
-      subCommand: []
-    },
-    {
-      name: "shallow",
-      version: "0.0.1",
-      example: "memorio.obj.shallow([object])",
-      author: "Dario Passariello",
-      creationDate: "20250101",
-      lastMod: "20250101",
-      type: "function",
-      active: true,
-      description: `
-              Generate a shallow copy of an object
-              Example: memorio.obj.shallow([object])
-            `,
-      subCommand: []
-    },
-    {
-      name: "deepCopy",
-      version: "0.0.1",
-      example: "memorio.obj.deepCopy([object])",
-      author: "Dario Passariello",
-      creationDate: "20250101",
-      lastMod: "20250101",
-      type: "function",
-      active: true,
-      description: `
-              Generate a deepCopy of an object
-              Example: memorio.obj.deepCopy([object])
-            `,
-      subCommand: []
-    }
-  ]
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 const newObj = {
 
   ////////////////////////
@@ -213,7 +41,7 @@ const newObj = {
       const serializeObject: any = {}
       for (const [objectKey, objectValue] of Object.entries(value)) {
         // console.info(`objectKey=${objectKey}  value=${objectValue}`)
-        serializeObject[objectKey] = memorio.obj.serialize(objectValue)
+        serializeObject[objectKey] = global.memorio.obj.serialize(objectValue)
       }
       return serializeObject
     }
@@ -230,13 +58,13 @@ const newObj = {
    */
   deSerialize: (valueNew: any): any => {
     if (typeof valueNew === 'string' && valueNew.toLowerCase().startsWith('function(')) {
-      return Function('"use strict"; return ' + valueNew)()
+      return Function('\'use strict\'; return ' + valueNew)()
     }
 
     if (typeof valueNew === 'object') {
       const deserializeObject: Record<string, any> = {}
       for (const [objectKey, objectValue] of Object.entries(valueNew)) {
-        deserializeObject[objectKey] = memorio.obj.deSerialize(objectValue)
+        deserializeObject[objectKey] = global.memorio.obj.deSerialize(objectValue)
       }
       return deserializeObject
     }
@@ -376,7 +204,7 @@ const newObj = {
    * @param separator The separator to use (default is '.').
    * @returns The created path string.
    */
-  path: (prop: string, object: string[], separator: string = "."): string => {
+  path: (prop: string, object: string[], separator: string = '.'): string => {
     return object.concat(prop).join(separator)
   },
 
@@ -409,4 +237,4 @@ const newObj = {
 
 /////////////////////////////////////////////////////////
 
-memorio.setDescription(description, newObj)
+global.memorio.setDescription({}, newObj)

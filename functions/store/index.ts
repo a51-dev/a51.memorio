@@ -1,7 +1,7 @@
 
 Object.defineProperty(
-  globalThis,
-  "store",
+  global,
+  'store',
   {
     value: new Proxy({}, {}),
     enumerable: false,
@@ -20,7 +20,7 @@ Object.defineProperties(
           if (item) return JSON.parse(item)
           return item
         } catch (err) {
-          console.error(`Error parsing store item "${name}":`, err)
+          console.error(`Error parsing store item '${name}':`, err)
         }
       }
     },
@@ -31,12 +31,12 @@ Object.defineProperties(
         try {
 
           if (value === null || value === undefined) localStorage.setItem(name, JSON.stringify(null))
-          else if (typeof value === "object" || typeof value === "number" || typeof value === "boolean" || typeof value === "string") localStorage.setItem(name, JSON.stringify(value))
-          else if (typeof value === "function") console.error("It's not secure to store functions.")
+          else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') localStorage.setItem(name, JSON.stringify(value))
+          else if (typeof value === 'function') console.error('It\'s not secure to store functions.')
 
         } catch (err) {
 
-          console.error(`Error setting store item "${name}":`, err)
+          console.error(`Error setting store item '${name}':`, err)
 
         }
       }
@@ -82,7 +82,7 @@ Object.defineProperties(
                 if (usage && quota) console.debug(`Using ${usage / 1024} out of ${quota / 1024} Mb.`)
               }
             )
-            .catch(err => { console.error("Error estimating quota:", err) })
+            .catch(err => { console.error('Error estimating quota:', err) })
         }
       }
     },

@@ -2,11 +2,11 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
   // EVENT FUNCTION FOR OBSERVER
   const event = (name: string) => {
-    const array = name.split("-")
+    const array = name.split('.')
     array.forEach(
       (x, i) => {
-        const command = array.slice(0, i + 1).join("-")
-        memorio.dispatch.set(command, { detail: { name: command } })
+        const command = array.slice(0, i + 1).join('.')
+        global.memorio.dispatch.set(command, { detail: { name: command } })
       }
     )
   }
@@ -23,28 +23,28 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
         try {
           const value = Reflect.get(target, prop)
-          if (value && typeof value === "object" && ["Array", "Object"].includes(value.constructor.name)) return buildProxy(value, callback, tree.concat(prop as string))
+          if (value && typeof value === 'object' && ['Array', 'Object'].includes(value.constructor.name)) return buildProxy(value, callback, tree.concat(prop as string))
           return value
         } catch (error) {
-          console.error("Error: ", error)
+          console.error('Error: ', error)
           return false
         }
       },
 
       set(target: any, prop: string, value: any): boolean {
 
-        if (target[prop] && typeof target[prop] === "object" && Object.isFrozen(target[prop])) {
-          console.error(`Error: state "${prop}" is locked`)
+        if (target[prop] && typeof target[prop] === 'object' && Object.isFrozen(target[prop])) {
+          console.error(`Error: state '${prop}' is locked`)
           return
         }
 
         try {
 
-          const path = memorio.obj.path(prop as string, tree)
+          const path = global.memorio.obj.path(prop as string, tree)
 
           callback(
             {
-              action: "set",
+              action: 'set',
               path,
               target,
               newValue: value,
@@ -52,16 +52,16 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
             }
           )
 
-          event("state-" + path.replaceAll(".", "-"))
+          event('state.' + path)
 
           Reflect.set(target, prop, value)
 
           // DEFINE LOCK PROPERTY FUNCTION
-          if (target[prop] && typeof target[prop] === "object") {
+          if (target[prop] && typeof target[prop] === 'object') {
 
             Reflect.defineProperty(
               target[prop],
-              "lock",
+              'lock',
               {
                 value() {
                   Object.defineProperty(
@@ -85,7 +85,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
         } catch (error) {
 
-          console.error("Error in set trap:", error)
+          console.error('Error in set trap:', error)
           return false
 
         }
@@ -94,11 +94,11 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
       deleteProperty(target: any, prop: string | symbol): boolean {
         try {
-          const path = memorio.obj.path(prop as string, tree)
-          callback({ action: "delete", path, target })
+          const path = global.memorio.obj.path(prop as string, tree)
+          callback({ action: 'delete', path, target })
           return Reflect.deleteProperty(target, prop)
         } catch (error) {
-          console.error("Error in deleteProperty trap:", error)
+          console.error('Error in deleteProperty trap:', error)
           return false
         }
       }
@@ -110,9 +110,9 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 }
 
 // SET STATE AS PROXY
-!globalThis?.state
-  ? globalThis.state = buildProxy({}, () => { })
-  : globalThis.state = state
+!global?.state
+  ? global.state = buildProxy({}, () => { })
+  : global.state = state
 
 ///////////////////////////////////////////////
 
@@ -124,7 +124,7 @@ testProxy.add(state)
 setInterval(
   () => {
     if (!testProxy.has(state)) {
-      alert("memorio State is compromised, check if you override it and please reload the page")
+      alert('memorio State is compromised, check if you override it and please reload the page')
       for (let i = 1; i < 99999; i++) clearInterval(i)
       stop()
     }
@@ -135,8 +135,8 @@ setInterval(
 
 // DEFINE THE STATE IN GLOBAL
 Object.defineProperty(
-  globalThis,
-  "state",
+  global,
+  'state',
   {
     enumerable: false,
     configurable: false
@@ -151,9 +151,8 @@ Object.defineProperties(
   {
     list: {
       get() {
-        const clone = memorio.array.deepClone(state)
-        console.info(clone)
-        return
+        const clone = global.memorio.array.deepClone(state)
+        return console.log(clone)
       }
     },
 

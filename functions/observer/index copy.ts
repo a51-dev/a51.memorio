@@ -1,8 +1,8 @@
-if (!globalThis.observer) globalThis.observer = null
+if (!global.observer) global.observer = null
 
 Object.defineProperty(
-  globalThis,
-  "observer",
+  global,
+  'observer',
   {
     enumerable: false
   }
@@ -13,11 +13,11 @@ Object.defineProperty(
 
 observer = (s, cb = null, option = true) => {
 
-  // CHECK IF "STATE." OR "STORE." EXIST
+  // CHECK IF 'STATE.' OR 'STORE.' EXIST
   const checkStateOrStore = (s: string) => {
-    const t = s.split(".")
-    if (t[0] !== "state") {
-      console.error(`Observer Error: You need to declare "state." or "store.". The "${s}" string is incorrect!`)
+    const t = s.split('.')
+    if (t[0] !== 'state') {
+      console.error(`Observer Error: You need to declare 'state.' or 'store.'. The '${s}' string is incorrect!`)
       return false
     }
     return true
@@ -29,7 +29,7 @@ observer = (s, cb = null, option = true) => {
 
   // LIST ALL ARRAY FROM STATE
   if (!s && !cb) {
-    console.error("Observer Error: You need to setup observer correctly, Some parameters are missed!")
+    console.error('Observer Error: You need to setup observer correctly, Some parameters are missed!')
     return
   }
 
@@ -37,7 +37,7 @@ observer = (s, cb = null, option = true) => {
 
   // CHECK
   if (!s && cb) {
-    console.error(`Observer Error: You need to declare what state need to be monitored as string like "state.test".`)
+    console.error(`Observer Error: You need to declare what state need to be monitored as string like 'state.test'.`)
     return
   }
 
@@ -45,7 +45,7 @@ observer = (s, cb = null, option = true) => {
 
   // RECALL
   if (s && !cb) {
-    memorio.dispatch.listen(
+    global.memorio.dispatch.listen(
       String(s),
       {
         detail: {
@@ -54,7 +54,7 @@ observer = (s, cb = null, option = true) => {
       } as any
     )
 
-    console.debug("called: ", s)
+    console.debug('called: ', s)
     return
   }
 
@@ -62,13 +62,12 @@ observer = (s, cb = null, option = true) => {
 
   // SETUP
   if (s && cb) {
-    if (typeof s !== "string" || typeof cb !== "function") {
-      console.error(`Observer Error: name of state need to be a "string" like "state.test" and the callback need to be a "function"`)
+    if (typeof s !== 'string' || typeof cb !== 'function') {
+      console.error(`Observer Error: name of state need to be a 'string' like 'state.test' and the callback need to be a 'function'`)
       return
     }
 
-    const t = s.replaceAll(".", "-")
-    memorio.dispatch.listen(t, cb, option)
+    global.memorio.dispatch.listen(s, cb, option)
     return
   }
 }
@@ -84,7 +83,7 @@ Object.defineProperties(
      * @returns The list of all installed observers.
      */
     list: {
-      get: () => globalThis.events
+      get: () => global.events
     },
 
     /////////////////////////////////////////////////////
@@ -96,7 +95,7 @@ Object.defineProperties(
     remove: {
       value: (name: any) => {
         if (!name) return
-        globalThis.events[name] = ""
+        global.events[name] = ''
         return
       }
     },
@@ -110,7 +109,7 @@ Object.defineProperties(
     removeAll: {
       get: () => {
         Object.entries(observer.list).forEach((el: any) => {
-          globalThis.events[el[0]]
+          global.events[el[0]]
         })
         return
       }
