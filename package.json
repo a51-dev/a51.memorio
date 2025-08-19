@@ -1,11 +1,18 @@
 {
   "name": "memorio",
-  "version": "0.2.3",
+  "version": "0.2.4",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "typings": "./types/*",
+  "typeRoots": [
+    "../node_modules/@types"
+  ],
   "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
   "deprecated": false,
   "preferGlobal": true,
-  "target": "web",
+  "target": "node",
   "copyright": "Dario Passariello, BigLogic ca - a51.dev is a BigLogic project",
   "homepage": "https://a51.gitbook.io/memorio",
   "author": {
@@ -18,7 +25,6 @@
     "url": "https://github.com/passariello/",
     "email": "dariopassariello@gmail.com"
   },
-  "main": "index.js",
   "contributors": [
     {
       "name": "Dario Passariello",
@@ -73,8 +79,6 @@
     "@eslint/js": "9.33.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
-    "@typescript-eslint/eslint-plugin": "8.39.1",
-    "@typescript-eslint/parser": "8.39.1",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
