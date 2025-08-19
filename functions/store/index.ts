@@ -1,6 +1,6 @@
 
 Object.defineProperty(
-  global,
+  globalThis,
   'store',
   {
     value: new Proxy({}, {}),
