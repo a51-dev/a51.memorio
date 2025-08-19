@@ -4,6 +4,9 @@
       "es2022",
       "dom"
     ],
+    "types": [
+      "node"
+    ],
     "strict": true,
     "noEmit": false,
     "noImplicitThis": true,
@@ -24,11 +27,10 @@
     "strictPropertyInitialization": false,
     "jsx": "react",
     "moduleDetection": "force",
-    "module": "CommonJS",
+    "module": "commonjs",
     "baseUrl": ".",
     "outDir": "./dist/",
     "target": "es2022",
-    "moduleResolution": "node",
     "rootDirs": [
       "./"
     ],
@@ -39,6 +41,8 @@
     }
   },
   "include": [
+    "index.d.ts",
+    "./types/memorio.d.ts",
     "./**/*.ts",
     "./**/*.tsx"
   ],

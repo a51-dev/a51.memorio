@@ -29,8 +29,8 @@ Object.defineProperty(
         const exec = (e: Event) => cb
           ? setTimeout(() => cb(e), 1)
           : null
-        window.addEventListener(name, exec)
-        global.events[name] = exec
+        globalThis.addEventListener(name, exec)
+        globalThis.events[name] = exec
       },
 
       /////////////////////////////////////////////////////
@@ -40,8 +40,8 @@ Object.defineProperty(
        * @param name The name of the event to remove the listener for.
        */
       remove: (name: string) => {
-        window.removeEventListener(name, global.events[name])
-        delete global.events[name]
+        globalThis.removeEventListener(name, globalThis.events[name])
+        delete globalThis.events[name]
       }
 
     }
