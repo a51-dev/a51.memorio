@@ -1,7 +1,7 @@
-if (!global.observer) global.observer = null
+if (!globalThis.observer) globalThis.observer = null
 
 Object.defineProperty(
-  global,
+  globalThis,
   'observer',
   {
     enumerable: false
@@ -45,7 +45,7 @@ observer = (s, cb = null, option = true) => {
 
   // RECALL
   if (s && !cb) {
-    global.memorio.dispatch.listen(
+    globalThis.memorio.dispatch.listen(
       String(s),
       {
         detail: {
@@ -67,7 +67,7 @@ observer = (s, cb = null, option = true) => {
       return
     }
 
-    global.memorio.dispatch.listen(s, cb, option)
+    globalThis.memorio.dispatch.listen(s, cb, option)
     return
   }
 }
@@ -83,7 +83,7 @@ Object.defineProperties(
      * @returns The list of all installed observers.
      */
     list: {
-      get: () => global.events
+      get: () => globalThis.events
     },
 
     /////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ Object.defineProperties(
     remove: {
       value: (name: any) => {
         if (!name) return
-        global.events[name] = ''
+        globalThis.events[name] = ''
         return
       }
     },
@@ -109,7 +109,7 @@ Object.defineProperties(
     removeAll: {
       get: () => {
         Object.entries(observer.list).forEach((el: any) => {
-          global.events[el[0]]
+          globalThis.events[el[0]]
         })
         return
       }
