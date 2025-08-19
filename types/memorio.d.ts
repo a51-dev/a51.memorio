@@ -1,5 +1,4 @@
 
-
 declare module 'memorio' {
   const resource: { [key: string]: any }
   export = resource
@@ -19,10 +18,6 @@ declare var memorio: any
 type arguments = any
 declare var arguments: any
 
-/////////////////////////////////////////////
-
-interface Descr {
-  name: string,
-  active: boolean,
-  subCommand: object,
-}
+global.memorio = global.memorio
+  ? global.memorio
+  : globalThis.memorio
