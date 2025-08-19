@@ -21,7 +21,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
     array.forEach(
       (x, i) => {
         const command = array.slice(0, i + 1).join('.')
-        global.memorio.dispatch.set(command, { detail: { name: command } })
+        globalThis.memorio.dispatch.set(command, { detail: { name: command } })
       }
     )
   }
@@ -55,7 +55,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
         try {
 
-          const path = global.memorio.objPath(prop as string, tree)
+          const path = globalThis.memorio.objPath(prop as string, tree)
 
           callback(
             {
@@ -109,7 +109,7 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
       deleteProperty(target: any, prop: string | symbol): boolean {
         try {
-          const path = global.memorio.objPath(prop as string, tree)
+          const path = globalThis.memorio.objPath(prop as string, tree)
           callback({ action: 'delete', path, target })
           return Reflect.deleteProperty(target, prop)
         } catch (error) {
@@ -125,9 +125,9 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 }
 
 // SET STATE AS PROXY
-!global?.state
-  ? global.state = buildProxy({}, () => { })
-  : global.state = state
+!globalThis?.state
+  ? globalThis.state = buildProxy({}, () => { })
+  : globalThis.state = state
 
 ///////////////////////////////////////////////
 
@@ -150,7 +150,7 @@ setInterval(
 
 // DEFINE THE STATE IN GLOBAL
 Object.defineProperty(
-  global,
+  globalThis,
   'state',
   {
     enumerable: false,
@@ -166,7 +166,7 @@ Object.defineProperties(
   {
     list: {
       get() {
-        const clone = global.memorio.array.deepClone(state)
+        const clone = globalThis.memorio.array.deepClone(state)
         return console.log(clone)
       }
     },
