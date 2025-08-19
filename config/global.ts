@@ -3,7 +3,7 @@ import p from '../package.json'
 /////////////////////////////////////
 
 Object.defineProperty(
-  global,
+  globalThis,
   'memorio',
   {
     value: {},
@@ -14,7 +14,7 @@ Object.defineProperty(
 )
 
 Object.defineProperty(
-  global,
+  globalThis,
   'events',
   {
     value: {},
