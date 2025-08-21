@@ -1,13 +1,10 @@
 {
   "name": "memorio",
-  "version": "0.2.4",
+  "version": "0.2.10",
   "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "typings": "./types/*",
-  "typeRoots": [
-    "../node_modules/@types"
-  ],
   "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
   "deprecated": false,
@@ -62,9 +59,6 @@
       "url": "https://www.patreon.com/passariello"
     }
   ],
-  "typing": [
-    "types/*"
-  ],
   "scripts": {
     "build": "node ./esbuild.config.mjs",
     "watch": "esbuild init.ts --bundle --outdir=dist --serve",
@@ -75,10 +69,14 @@
     "----------": "",
     "publish:npm": "npm run build && npm publish ./dist"
   },
+  "dependencies": {
+    "dphelper.types": "0.0.14"
+  },
   "devDependencies": {
     "@eslint/js": "9.33.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
+    "dphelper.types": "0.0.14",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
