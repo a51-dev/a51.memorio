@@ -1,4 +1,4 @@
-import p from '../package.json'
+import p from '../package.json' with { type: "json" }
 
 /////////////////////////////////////
 
