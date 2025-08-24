@@ -13,7 +13,7 @@ Object.defineProperty(
 
 /////////////////////////////////////////////////////
 
-const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tree: string[] = []): any => {
+export const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tree: string[] = []): any => {
 
   // EVENT FUNCTION FOR OBSERVER
   const event = (name: string) => {
@@ -33,16 +33,49 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
     obj,
     {
       get(target: any, prop: any) {
+        // Handle special methods first
+        if (prop === 'list') {
+          const result = {}
+          for (const key in target) {
+            if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+              result[key] = target[key]
+            }
+          }
+          return result
+        }
+
+        if (prop === 'remove') {
+          return function (key: string) {
+            if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
+              delete target[key]
+              return true
+            }
+            return false
+          }
+        }
+
+        if (prop === 'removeAll') {
+          return function () {
+            for (const key in target) {
+              if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+                delete target[key]
+              }
+            }
+            return true
+          }
+        }
 
         if (Object.isFrozen(target[prop])) return target[prop]
 
         try {
           const value = Reflect.get(target, prop)
-          if (value && typeof value === 'object' && ['Array', 'Object'].includes(value.constructor.name)) return buildProxy(value, callback, tree.concat(prop as string))
+          if (value && typeof value === 'object' && ['Array', 'Object'].includes(value.constructor.name)) {
+            return buildProxy(value, callback, tree.concat(prop as string))
+          }
           return value
         } catch (error) {
           console.error('Error: ', error)
-          return false
+          return undefined
         }
       },
 
@@ -124,9 +157,12 @@ const buildProxy = (obj: Record<string, any>, callback: (props: any) => void, tr
 
 }
 
+// Initialize base state object
+const baseState = {}
+
 // SET STATE AS PROXY
 !globalThis?.state
-  ? globalThis.state = buildProxy({}, () => { })
+  ? globalThis.state = buildProxy(baseState, () => { })
   : globalThis.state = state
 
 ///////////////////////////////////////////////
@@ -160,44 +196,4 @@ Object.defineProperty(
 
 ///////////////////////////////////////////////
 
-// ADD FUNCTION IN STATE IN GLOBAL
-Object.defineProperties(
-  state,
-  {
-    list: {
-      get() {
-        const clone = globalThis.memorio.array.deepClone(state)
-        return console.log(clone)
-      }
-    },
-
-    remove: {
-      value(s: string) {
-        if (s in state) {
-          delete state[s]
-          console.debug(`State '${s}' deleted`)
-        } else {
-          console.error(`'${s}' not exist`)
-        }
-        return
-      },
-      writable: false,
-      configurable: false
-    },
-
-    removeAll: {
-      value() {
-        state.forEach(
-          item => {
-            delete state[item[0]]
-          }
-        )
-        return
-      },
-      writable: false,
-      configurable: false
-    }
-
-  }
-
-)
+// END

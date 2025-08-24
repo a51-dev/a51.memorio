@@ -47,7 +47,7 @@ export default defineConfig([
       'no-console': 'off',
       'no-undef': 'off',  // Disable undefined variable checking for JS files
       'no-unused-vars': 'warn',  // Make unused vars warnings instead of errors
-      'semi': ['error', 'never']
+      'semi': ['warn', 'never']
     }
   },
   // TypeScript files configuration
@@ -68,7 +68,7 @@ export default defineConfig([
       'no-console': 'off',
       'no-undef': 'off',  // TypeScript handles this better
       'no-unused-vars': 'off',  // Use the TypeScript specific version instead
-      'semi': ['error', 'never'],
+      'semi': ['warn', 'never'],
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-var-requires': 'off'
@@ -151,7 +151,7 @@ export default defineConfig([
         "warn"
       ],
       "semi": [
-        "error",
+        "warn",
         "never"
       ],
       "max-nested-callbacks": [

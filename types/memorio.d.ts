@@ -1,9 +1,4 @@
 
-declare module 'memorio' {
-  const resource: { [key: string]: any }
-  export = resource
-}
-
 interface _memorio {
   setProps: any,
   obj: any,
