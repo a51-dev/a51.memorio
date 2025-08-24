@@ -73,19 +73,19 @@
     "publish:npm": "npm run build && npm publish ./dist"
   },
   "dependencies": {
-    "dphelper.types": "0.0.14"
+    "dphelper.types": "0.0.18"
   },
   "devDependencies": {
-    "@eslint/js": "9.33.0",
+    "@eslint/js": "9.34.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
-    "dphelper.types": "0.0.14",
+    "dphelper.types": "0.0.18",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
-    "eslint": "9.33.0",
+    "eslint": "9.34.0",
     "ts-loader": "^9.5.2",
     "ts-node": "10.9.2",
     "tslib": "^2.8.1",
