@@ -4,6 +4,8 @@
       "es2022",
       "dom"
     ],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "types": [
       "node"
     ],
@@ -27,7 +29,6 @@
     "strictPropertyInitialization": false,
     "jsx": "react",
     "moduleDetection": "force",
-    "module": "commonjs",
     "baseUrl": ".",
     "outDir": "./dist/",
     "target": "es2022",
