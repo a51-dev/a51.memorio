@@ -1,6 +1,6 @@
 {
   "name": "memorio",
-  "version": "0.2.15",
+  "version": "0.2.19",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -77,7 +77,7 @@
     "types/*"
   ],
   "dependencies": {
-    "dphelper.types": "0.0.18"
+    "dphelper.types": "0.0.19"
   },
   "devDependencies": {
     "@eslint/js": "9.34.0",
@@ -85,7 +85,7 @@
     "@types/node": "^24.3.0",
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
-    "dphelper.types": "0.0.18",
+    "dphelper.types": "0.0.19",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
