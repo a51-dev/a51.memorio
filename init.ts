@@ -2,11 +2,9 @@
 // LOAD SCRIPTS
 
 import "dphelper.types"
-
-require('./config/global')
-require('./config/dispatch')
-
-require('./functions/state')
-require('./functions/observer')
-require('./functions/store')
-require('./functions/cache')
+import './config/global'
+import './config/dispatch'
+import './functions/state'
+import './functions/observer'
+import './functions/store'
+import './functions/cache'
