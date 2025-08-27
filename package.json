@@ -1,6 +1,6 @@
 {
   "name": "memorio",
-  "version": "0.2.19",
+  "version": "1.0.2",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -21,9 +21,6 @@
   "typings": "./types/*",
   "description": "Memorio, State + Observer and Store for a easy life ",
   "license": "MIT",
-  "deprecated": false,
-  "preferGlobal": true,
-  "target": "node",
   "copyright": "Dario Passariello, BigLogic ca - a51.dev is a BigLogic project",
   "homepage": "https://a51.gitbook.io/memorio",
   "author": {
@@ -46,9 +43,6 @@
       "email": "valeriacalascaglitta@gmail.com"
     }
   ],
-  "globals": {
-    "memorio": {}
-  },
   "keywords": [
     "biglogic",
     "a51",
@@ -83,8 +77,8 @@
     "@eslint/js": "9.34.0",
     "@types/jest": "30.0.0",
     "@types/node": "^24.3.0",
-    "@typescript-eslint/eslint-plugin": "8.40.0",
-    "@typescript-eslint/parser": "8.40.0",
+    "@typescript-eslint/eslint-plugin": "8.41.0",
+    "@typescript-eslint/parser": "8.41.0",
     "dphelper.types": "0.0.19",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
@@ -93,7 +87,7 @@
     "jest": "30.0.5",
     "jest-environment-jsdom": "30.0.5",
     "ts-jest": "29.4.1",
-    "ts-loader": "^9.5.2",
+    "ts-loader": "^9.5.4",
     "ts-node": "10.9.2",
     "tslib": "^2.8.1",
     "typescript": "5.9.2"

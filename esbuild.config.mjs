@@ -27,9 +27,13 @@ esbuild.build(
               from: 'types/**/*',
               to: './types'
             },
+            // {
+            //   from: '.github/**/*',
+            //   to: './'
+            // },
             {
-              from: '.github/**/*',
-              to: './'
+              from: '.github/README.md',
+              to: './README.md'
             },
             {
               from: './package.json',
