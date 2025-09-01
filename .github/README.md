@@ -1,19 +1,18 @@
 # Memorio
 
-> A lightweight, type-safe state management library for modern JavaScript applications
+> A lightweight, type-safe state management library for JavaScript applications
 
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?logo=typescript)
-![Node.js](https://img.shields.io/badge/Node.js-24.3.0-green?logo=node.js)
-![Jest](https://img.shields.io/badge/Jest-30.0.5-red?logo=jest)
-![ESLint](https://img.shields.io/badge/ESLint-9.34.0-purple?logo=eslint)
-![esbuild](https://img.shields.io/badge/esbuild-0.25.9-yellow?logo=esbuild)
+![TypeScript](https://img.shields.io/badge/TypeScript-gray?logo=typescript)
+![Node.js](https://img.shields.io/badge/Node.js-gray?logo=node.js)
+![Jest](https://img.shields.io/badge/Jest-gray?logo=jest)
+![ESLint](https://img.shields.io/badge/ESLint-gray?logo=eslint)
+![esbuild](https://img.shields.io/badge/esbuild-gray?logo=esbuild)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.2.15-orange)
 
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-25%20passed-success)
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Installation](#installation)
@@ -27,27 +26,23 @@
 - [Security](#security)
 - [License](#license)
 
-## ✨ Features
+## Features
 
-- 🔄 Reactive state management with observer pattern
-- 💾 Persistent storage with Store API
-- ⚡ Session management for temporary data
-- 🔒 Type-safe with full TypeScript support
-- 🧪 Comprehensive test coverage
-- 🎯 Zero dependencies
-- 🔍 Easy debugging with proxy-based state
+- Reactive state management with observer pattern
+- Persistent storage with Store API
+- Session management for temporary data
+- Type-safe with full TypeScript support
+- Comprehensive test coverage
+- Zero dependencies
+- Easy debugging with proxy-based state
 
-## 📦 Installation
+## Installation
 
 ```bash
-npm install memorio
-# or
-yarn add memorio
-# or
-pnpm add memorio
+npm i -D memorio
 ```
 
-✅ All test suites are passing:
+### All test suites are passing
 
 - Basic functionality tests
 - State management tests
@@ -57,9 +52,14 @@ pnpm add memorio
 
 Total: 25 tests passed across 5 test suites
 
-## 🚀 Quick Start
+## Quick Start
 
 ```javascript
+/*
+ IMPORTANT!
+ Add import only at first start of your SPA. Became global!.
+ You don't need to import any time you need to use memorio
+*/
 import 'memorio';
 
 // State Management
@@ -67,9 +67,12 @@ state.counter = 0;
 state.user = { name: 'John', age: 30 };
 
 // Observer Pattern
-observer('state.counter', (newValue, oldValue) => {
-  console.log(`Counter changed from ${oldValue} to ${newValue}`);
-});
+observer(
+  'state.counter',
+    (newValue, oldValue) => {
+    console.log(`Counter changed from ${oldValue} to ${newValue}`);
+  }
+);
 
 // Store (Persistent Storage)
 store.set('preferences', { theme: 'dark' });
@@ -80,7 +83,7 @@ session.set('token', 'user-jwt-token');
 const token = session.get('token');
 ```
 
-## 📖 API Reference
+## API Reference
 
 ### State Management
 
@@ -113,20 +116,28 @@ Observe state changes with React-like syntax:
 
 ```javascript
 // Basic observer
-observer('state.user', (newValue, oldValue) => {
-  console.log('User updated:', newValue);
-});
+observer(
+  'state.user',
+    (newValue, oldValue) => {
+    console.log('User updated:', newValue);
+  }
+);
 
 // With React useState
 const [user, setUser] = useState();
-observer('state.user', () => {
-  setUser(state.user);
-});
+observer(
+  'state.user',
+  () => {
+    setUser(state.user);
+  }
+);
 
 // With React useEffect
-useEffect(() => {
-  console.log('User changed:', state.user);
-}, [state.user]);
+useEffect(
+  () => {
+    console.log('User changed:', user);
+  }, [user]
+);
 ```
 
 ### Another example of use of Observer
@@ -189,10 +200,12 @@ Temporary storage that persists during page sessions:
 
 ```javascript
 // Setting session data
-session.set('userSession', {
-  id: 'user123',
-  lastActive: Date.now()
-});
+session.set(
+  'userSession', {
+    id: 'user123',
+    lastActive: Date.now()
+  }
+);
 
 // Getting session data
 const userData = session.get('userSession');
@@ -205,86 +218,13 @@ session.remove('userSession');
 
 // Clearing all session data
 session.removeAll();
-
-  // Remove all stored data if necessary
-  // store.removeAll();
-
-  return (
-    <div>
-      <h1 id="name">...</h1>
-    </div>
-  );
-}
-
-export default App;
 ```
 
 ---
 
-## SESSION
+## Testing
 
-Session storage provides a way to store data for the duration of a page session. The data persists as long as the browser is open and survives over page reloads, but is lost when the browser tab or window is closed.
-
-```js
-// Set a session value:
-session.set("userId", "12345")
-
-// Get a session value:
-session.get("userId") // Output: "12345"
-
-// Remove a specific session value:
-session.remove("userId")
-
-// Get the number of items in session:
-session.size() // Output: number of stored items
-
-// Remove all session values:
-session.removeAll()
-```
-
-### Example use Session in React
-
-```js
-import { useEffect } from 'react';
-import 'memorio';
-
-function UserSession() {
-  useEffect(() => {
-    // Store user session data
-    session.set('userSession', {
-      id: '12345',
-      lastActive: Date.now(),
-      preferences: {
-        theme: 'dark',
-        language: 'en'
-      }
-    });
-
-    // Retrieve session data
-    const userData = session.get('userSession');
-    console.log('User session:', userData);
-
-    // Clean up on component unmount
-    return () => {
-      session.remove('userSession');
-    };
-  }, []);
-
-  return (
-    <div>
-      {/* Your component JSX */}
-    </div>
-  );
-}
-
-export default UserSession;
-```
-
----
-
-## 🧪 Testing
-
-✅ All test suites are passing:
+## Test suites are passing
 
 - Basic functionality tests
 - State management tests
@@ -294,26 +234,27 @@ export default UserSession;
 
 Total: 25 tests passed across 5 test suites
 
-## 🔒 Security
+## Security
 
 Security scans and reports are available at:
+
 - [Socket.dev](https://socket.dev/npm/package/memorio)
 - [Snyk.io](https://security.snyk.io/package/npm/memorio)
 
-## 📄 License
+## License
 
-MIT © [Dario Passariello](https://dario.passariello.ca/)
+MIT (c) [Dario Passariello](https://dario.passariello.ca/)
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📧 Support
+## Support
 
 Need help? Feel free to [open an issue](https://github.com/a51-dev/a51.memorio/issues).
 
 ---
 
-Created with ❤️ by [Dario Passariello](https://dario.passariello.ca/) - Copyright © 2025
+Created with by [Dario Passariello](https://dario.passariello.ca/) - Copyright (c) 2025
