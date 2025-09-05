@@ -3,21 +3,6 @@
   "version": "1.1.2",
   "type": "module",
   "main": "index.js",
-  "scripts": {
-    "build": "node ./esbuild.config.mjs",
-    "watch": "esbuild init.ts --bundle --outdir=dist --serve",
-    "----------": "",
-    "updates": "npx npm-check-updates -u && npm i",
-    "-----------": "",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
-    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && jest --watch",
-    "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && jest --coverage",
-    "test:watchAll": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll",
-    "tsc": "tsc -b .",
-    "eslint": "eslint .",
-    "------------": "",
-    "publish:npm": "npm run build && npm publish ./dist"
-  },
   "types": "index.d.ts",
   "typings": "./types/*",
   "description": "Memorio, State + Observer and Store for a easy life ",
@@ -71,6 +56,21 @@
   "typing": [
     "types/*"
   ],
+  "scripts": {
+    "build": "node ./esbuild.config.mjs",
+    "watch": "esbuild init.ts --bundle --outdir=dist --serve",
+    "----------": "",
+    "updates": "npx npm-check-updates -u && npm i",
+    "-----------": "",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
+    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && jest --watch",
+    "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && jest --coverage",
+    "test:watchAll": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll",
+    "tsc": "tsc -b .",
+    "eslint": "eslint .",
+    "------------": "",
+    "publish:npm": "npm run build && npm publish ./dist"
+  },
   "dependencies": {
     "dphelper.types": "0.0.19"
   },
