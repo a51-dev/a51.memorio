@@ -2,15 +2,20 @@
 
 > A lightweight, type-safe state management library for JavaScript applications
 
+[![version](https://img.shields.io/npm/v/memorio.svg)](https://npmjs.org/package/memorio)
+[![downloads](https://img.shields.io/npm/dm/memorio.svg)](https://npmjs.org/package/memorio)
+[![memorio](https://snyk.io/advisor/npm-package/memorio/badge.svg)](https://snyk.io/advisor/npm-package/memorio)
+
 ![TypeScript](https://img.shields.io/badge/TypeScript-gray?logo=typescript)
 ![Node.js](https://img.shields.io/badge/Node.js-gray?logo=node.js)
 ![Jest](https://img.shields.io/badge/Jest-gray?logo=jest)
 ![ESLint](https://img.shields.io/badge/ESLint-gray?logo=eslint)
 ![esbuild](https://img.shields.io/badge/esbuild-gray?logo=esbuild)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-25%20passed-success)
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Table of Contents
 
@@ -33,7 +38,6 @@
 - Session management for temporary data
 - Type-safe with full TypeScript support
 - Comprehensive test coverage
-- Zero dependencies
 - Easy debugging with proxy-based state
 
 ## Installation
@@ -60,13 +64,18 @@ Total: 25 tests passed across 5 test suites
  Add import only at first start of your SPA. Became global!.
  You don't need to import any time you need to use memorio
 */
+
 import 'memorio';
 
 // State Management
 state.counter = 0;
+state.active = false;
+state.name = "john";
 state.user = { name: 'John', age: 30 };
+state.hours = [2,3,10,23]
 
 // Observer Pattern
+// Example: if you change the state.counter you get a console.log
 observer(
   'state.counter',
     (newValue, oldValue) => {
@@ -114,7 +123,8 @@ state.removeAll();
 
 Observe state changes with React-like syntax:
 
-```javascript
+```js
+
 // Basic observer
 observer(
   'state.user',
@@ -122,6 +132,14 @@ observer(
     console.log('User updated:', newValue);
   }
 );
+
+```
+
+1. You can use in a function outside React
+2. In a javascript function
+3. in a setTimeout
+
+```js
 
 // With React useState
 const [user, setUser] = useState();
@@ -132,48 +150,20 @@ observer(
   }
 );
 
-// With React useEffect
+// With React useEffect to avoid multiple observer after update
 useEffect(
   () => {
-    console.log('User changed:', user);
-  }, [user]
+    observer(
+      'state.user',
+      () => {
+        setUser(state.user);
+      }
+    );
+  }, []
 );
 ```
 
-### Another example of use of Observer
-
-```js
-import 'memorio';
-
-// Use the observer to log the changing state value
-observer(
-  'state.count',
-  () => console.log("State changed: ", state.count)
-);
-
-// Store a value in the state that changes every 5 seconds
-setInterval(() => state.count = Date.now(), 5000);
-```
-
----
-
-## STORE
-
-```js
-// Set a store:
-store.set("test", { test: "test" })
-
-// Get a store:
-store.get("test") // Output: { test: "test" }
-
-// Remove a store:
-store.remove("test") // Output: "ok"
-
-// Remove all stores:
-store.removeAll() // Output: "ok"
-```
-
-### Store
+## Store
 
 Persistent storage for your application:
 
@@ -194,11 +184,11 @@ const size = store.size();
 store.removeAll();
 ```
 
-### Session
+## Session
 
 Temporary storage that persists during page sessions:
 
-```javascript
+```js
 // Setting session data
 session.set(
   'userSession', {
@@ -244,17 +234,5 @@ Security scans and reports are available at:
 ## License
 
 MIT (c) [Dario Passariello](https://dario.passariello.ca/)
-
----
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-Need help? Feel free to [open an issue](https://github.com/a51-dev/a51.memorio/issues).
-
----
 
 Created with by [Dario Passariello](https://dario.passariello.ca/) - Copyright (c) 2025
