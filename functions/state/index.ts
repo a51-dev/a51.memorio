@@ -175,7 +175,7 @@ testProxy.add(state)
 setInterval(
   () => {
     if (!testProxy.has(state)) {
-      alert('memorio State is compromised, check if you override it and please reload the page')
+      alert('memorio state is compromised, check if you override it and please reload the page')
       for (let i = 1; i < 99999; i++) clearInterval(i)
       stop()
     }
