@@ -1,23 +1,8 @@
 {
   "name": "memorio",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "type": "module",
   "main": "index.js",
-  "scripts": {
-    "build": "node ./esbuild.config.mjs",
-    "watch": "esbuild init.ts --bundle --outdir=dist --serve",
-    "----------": "",
-    "updates": "npx npm-check-updates -u && npm i",
-    "-----------": "",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
-    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && jest --watch",
-    "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && jest --coverage",
-    "test:watchAll": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll",
-    "tsc": "tsc -b .",
-    "eslint": "eslint .",
-    "------------": "",
-    "publish:npm": "npm run build && npm publish ./dist"
-  },
   "types": "index.d.ts",
   "typings": "./types/*",
   "description": "Memorio, State + Observer and Store for a easy life ",
@@ -71,11 +56,26 @@
   "typing": [
     "types/*"
   ],
+  "scripts": {
+    "build": "node ./esbuild.config.mjs",
+    "watch": "esbuild init.ts --bundle --outdir=dist --serve",
+    "----------": "",
+    "updates": "npx npm-check-updates -u && npm i",
+    "-----------": "",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
+    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && jest --watch",
+    "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && jest --coverage",
+    "test:watchAll": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll",
+    "tsc": "tsc -b .",
+    "eslint": "eslint .",
+    "------------": "",
+    "publish:npm": "npm run build && npm publish ./dist"
+  },
   "dependencies": {
     "dphelper.types": "0.0.19"
   },
   "devDependencies": {
-    "@eslint/js": "9.34.0",
+    "@eslint/js": "9.35.0",
     "@types/jest": "30.0.0",
     "@types/node": "^24.3.1",
     "@typescript-eslint/eslint-plugin": "8.42.0",
@@ -84,7 +84,7 @@
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
-    "eslint": "9.34.0",
+    "eslint": "9.35.0",
     "jest": "30.1.3",
     "jest-environment-jsdom": "30.1.2",
     "ts-jest": "29.4.1",
