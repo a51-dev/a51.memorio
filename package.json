@@ -79,7 +79,7 @@
     "@types/jest": "30.0.0",
     "@types/node": "^24.3.1",
     "@typescript-eslint/eslint-plugin": "8.42.0",
-    "@typescript-eslint/parser": "8.42.0",
+    "@typescript-eslint/parser": "8.43.0",
     "dphelper.types": "0.0.19",
     "esbuild": "^0.25.9",
     "esbuild-plugin-clean": "^1.0.1",
