@@ -22,6 +22,7 @@ Object.defineProperties(
         } catch (err) {
           console.error(`Error parsing session item '${name}':`, err)
         }
+        return
       }
     },
 
@@ -29,16 +30,13 @@ Object.defineProperties(
       value(name: string, value: any) {
         if (!name) return
         try {
-
           if (value === null || value === undefined) sessionStorage.setItem(name, JSON.stringify(null))
           else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') sessionStorage.setItem(name, JSON.stringify(value))
           else if (typeof value === 'function') console.error('It\'s not secure to session functions.')
-
         } catch (err) {
-
           console.error(`Error setting session item '${name}':`, err)
-
         }
+        return
       }
     },
 
@@ -49,12 +47,14 @@ Object.defineProperties(
           sessionStorage.removeItem(name)
           return true
         }
+        return
       }
     },
 
     delete: {
       value(name: string) {
         session.remove(name)
+        return true
       }
 
     },
@@ -84,6 +84,7 @@ Object.defineProperties(
             )
             .catch(err => { console.error('Error estimating quota:', err) })
         }
+        return
       }
     },
 

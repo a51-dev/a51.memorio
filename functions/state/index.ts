@@ -24,6 +24,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
         globalThis.memorio.dispatch.set(command, { detail: { name: command } })
       }
     )
+    return
   }
 
   ///////////////////////////////////////////////
@@ -77,6 +78,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
           console.error('Error: ', error)
           return undefined
         }
+
       },
 
       set(target: any, prop: string, value: any): boolean {
@@ -179,6 +181,7 @@ setInterval(
       for (let i = 1; i < 99999; i++) clearInterval(i)
       stop()
     }
+    return
   }, 1000
 )
 
