@@ -22,6 +22,7 @@ Object.defineProperties(
         } catch (err) {
           console.error(`Error parsing store item '${name}':`, err)
         }
+        return
       }
     },
 
@@ -29,16 +30,13 @@ Object.defineProperties(
       value(name: string, value: any) {
         if (!name) return
         try {
-
           if (value === null || value === undefined) localStorage.setItem(name, JSON.stringify(null))
           else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') localStorage.setItem(name, JSON.stringify(value))
           else if (typeof value === 'function') console.error('It\'s not secure to store functions.')
-
         } catch (err) {
-
           console.error(`Error setting store item '${name}':`, err)
-
         }
+        return
       }
     },
 
@@ -49,12 +47,14 @@ Object.defineProperties(
           localStorage.removeItem(name)
           return true
         }
+        return
       }
     },
 
     delete: {
       value(name: string) {
         store.remove(name)
+        return
       }
 
     },
@@ -84,6 +84,7 @@ Object.defineProperties(
             )
             .catch(err => { console.error('Error estimating quota:', err) })
         }
+        return
       }
     },
 
