@@ -8,7 +8,7 @@ Object.defineProperty(
   {
     value: {},
     writable: false,
-    configurable: false,
+    configurable: true,
     enumerable: false
   }
 )

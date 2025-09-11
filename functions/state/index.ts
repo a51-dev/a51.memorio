@@ -3,7 +3,7 @@ Object.defineProperty(
   'objPath',
   {
     writable: false,
-    configurable: false,
+    configurable: true,
     enumerable: false,
     value: (prop: string, object: string[], separator: string = '.'): string => {
       return object.concat(prop).join(separator)
@@ -193,7 +193,7 @@ Object.defineProperty(
   'state',
   {
     enumerable: false,
-    configurable: false
+    configurable: true
   }
 )
 

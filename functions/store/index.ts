@@ -5,7 +5,7 @@ Object.defineProperty(
   {
     value: new Proxy({}, {}),
     enumerable: false,
-    configurable: false
+    configurable: true
   }
 )
 
@@ -56,7 +56,6 @@ Object.defineProperties(
         store.remove(name)
         return
       }
-
     },
 
     removeAll: {
