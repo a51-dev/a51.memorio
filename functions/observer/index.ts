@@ -4,7 +4,8 @@ Object.defineProperty(
   globalThis,
   'observer',
   {
-    enumerable: false
+    enumerable: false,
+    configurable: true
   }
 )
 
