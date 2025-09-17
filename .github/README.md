@@ -1,6 +1,6 @@
-# [memorio](https://npmjs.com/packages/memorio)
+# [memorio](https://npmjs.com/package/memorio)
 
-[![NPM](https://nodei.co/npm/memorio.png?stars=true&downloads=true)](https://nodei.co/npm/memorio/)
+[![NPM](https://nodei.co/npm/memorio.png?stars=true&downloads=true)](https://npmjs.com/package/memorio)
 
 > A lightweight, type-safe state management library for JavaScript applications
 
