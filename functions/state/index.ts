@@ -2,6 +2,7 @@ Object.defineProperty(
   memorio,
   'objPath',
   {
+    writable: false,
     configurable: true,
     enumerable: false,
     value: (prop: string, object: string[], separator: string = '.'): string => {
@@ -16,10 +17,10 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
 
   // EVENT FUNCTION FOR OBSERVER
   const event = (name: string) => {
-    const array = name.split('-')
+    const array = name.split('.')
     array.forEach(
       (x, i) => {
-        const command = array.slice(0, i + 1).join('-')
+        const command = array.slice(0, i + 1).join('.')
         globalThis.memorio.dispatch.set(command, { detail: { name: command } })
       }
     )
@@ -33,19 +34,50 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
     obj,
     {
       get(target: any, prop: any) {
+        // Handle special methods first
+
+        // if (prop === 'list') {
+        //   const result = {}
+        //   for (const key in target) {
+        //     if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+        //       result[key] = target[key]
+        //     }
+        //   }
+        //   return result
+        // }
+
+        // if (prop === 'remove') {
+        //   return function (key: string) {
+        //     if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
+        //       delete target[key]
+        //       return true
+        //     }
+        //     return false
+        //   }
+        // }
+
+        // if (prop === 'removeAll') {
+        //   return function () {
+        //     for (const key in target) {
+        //       if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+        //         delete target[key]
+        //       }
+        //     }
+        //     return true
+        //   }
+        // }
 
         if (Object.isFrozen(target[prop])) return target[prop]
 
         try {
           const value = Reflect.get(target, prop)
           if (value && typeof value === 'object' && ['Array', 'Object'].includes(value.constructor.name)) {
-            console.log(">>>>", value)
             return buildProxy(value, callback, tree.concat(prop as string))
           }
           return value
         } catch (error) {
           console.error('Error: ', error)
-          return false
+          return undefined
         }
 
       },
@@ -71,7 +103,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
             }
           )
 
-          event('state.' + path.replaceAll(".", "-"))
+          event('state.' + path)
 
           Reflect.set(target, prop, value)
 
@@ -128,7 +160,6 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
 
 }
 
-
 // SET STATE AS PROXY
 !globalThis?.state
   ? globalThis.state = buildProxy({}, () => { })
@@ -160,19 +191,20 @@ Object.defineProperty(
   'state',
   {
     enumerable: false,
-    configurable: false
+    configurable: true
   }
 )
 
 ///////////////////////////////////////////////
 
-// // ADD FUNCTION IN STATE IN GLOBAL
+// ADD FUNCTION IN STATE IN GLOBAL
 Object.defineProperties(
   state,
   {
     list: {
       get() {
-        console.info(JSON.parse(JSON.stringify(state)))
+        const clone = JSON.parse(JSON.stringify(state))
+        console.info(clone)
         return
       },
       writable: false,
@@ -209,5 +241,6 @@ Object.defineProperties(
   }
 
 )
+
 
 // END

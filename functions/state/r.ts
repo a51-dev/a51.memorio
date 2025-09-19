@@ -160,6 +160,61 @@ Object.defineProperty(
 
 ///////////////////////////////////////////////
 
+// ADD FUNCTION IN STATE IN GLOBAL
+Object.defineProperties(
+  state,
+  {
+    list: {
+      get() {
+        const clone = JSON.parse(JSON.stringify(state))
+        console.info(clone)
+        return
+      }
+    },
 
+    remove: {
+      value(s: string) {
+        if (s in state) {
+          delete state[s]
+          console.debug(`State '${s}' deleted`)
+        } else {
+          console.error(`'${s}' not exist`)
+        }
+        return
+      },
+      writable: false,
+      configurable: false
+    },
+
+    removeAll: {
+      value() {
+        state.forEach(
+          item => {
+            delete state[item[0]]
+          }
+        )
+        return
+      },
+      writable: false,
+      configurable: false
+    },
+
+    mex: {
+      value(props: any) {
+        $('#dpConsole').append(`
+          <span>
+            <span style="color: green">State ${props.property} changed: <span style="color: yellow">"${props.value}"</span></span>
+          </span>
+          <span style="color: hsl(252deg 100% 75%)">"${JSON.stringify(props?.value || {})}"</span>
+        `)
+        return
+      },
+      writable: false,
+      configurable: false
+    }
+
+  }
+
+)
 
 // Object.freeze(state)
