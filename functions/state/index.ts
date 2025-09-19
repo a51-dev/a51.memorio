@@ -2,7 +2,6 @@ Object.defineProperty(
   memorio,
   'objPath',
   {
-    writable: false,
     configurable: true,
     enumerable: false,
     value: (prop: string, object: string[], separator: string = '.'): string => {
@@ -17,10 +16,10 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
 
   // EVENT FUNCTION FOR OBSERVER
   const event = (name: string) => {
-    const array = name.split('.')
+    const array = name.split('-')
     array.forEach(
       (x, i) => {
-        const command = array.slice(0, i + 1).join('.')
+        const command = array.slice(0, i + 1).join('-')
         globalThis.memorio.dispatch.set(command, { detail: { name: command } })
       }
     )
@@ -34,49 +33,19 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
     obj,
     {
       get(target: any, prop: any) {
-        // Handle special methods first
-        if (prop === 'list') {
-          const result = {}
-          for (const key in target) {
-            if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
-              result[key] = target[key]
-            }
-          }
-          return result
-        }
-
-        if (prop === 'remove') {
-          return function (key: string) {
-            if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
-              delete target[key]
-              return true
-            }
-            return false
-          }
-        }
-
-        if (prop === 'removeAll') {
-          return function () {
-            for (const key in target) {
-              if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
-                delete target[key]
-              }
-            }
-            return true
-          }
-        }
 
         if (Object.isFrozen(target[prop])) return target[prop]
 
         try {
           const value = Reflect.get(target, prop)
           if (value && typeof value === 'object' && ['Array', 'Object'].includes(value.constructor.name)) {
+            console.log(">>>>", value)
             return buildProxy(value, callback, tree.concat(prop as string))
           }
           return value
         } catch (error) {
           console.error('Error: ', error)
-          return undefined
+          return false
         }
 
       },
@@ -102,7 +71,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
             }
           )
 
-          event('state.' + path)
+          event('state.' + path.replaceAll(".", "-"))
 
           Reflect.set(target, prop, value)
 
@@ -159,12 +128,10 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
 
 }
 
-// Initialize base state object
-const baseState = {}
 
 // SET STATE AS PROXY
 !globalThis?.state
-  ? globalThis.state = buildProxy(baseState, () => { })
+  ? globalThis.state = buildProxy({}, () => { })
   : globalThis.state = state
 
 ///////////////////////////////////////////////
@@ -177,7 +144,7 @@ testProxy.add(state)
 setInterval(
   () => {
     if (!testProxy.has(state)) {
-      alert('memorio state is compromised, check if you override it and please reload the page')
+      alert('Memorio state is compromised, check if you override it and please reload the page')
       for (let i = 1; i < 99999; i++) clearInterval(i)
       stop()
     }
@@ -193,10 +160,54 @@ Object.defineProperty(
   'state',
   {
     enumerable: false,
-    configurable: true
+    configurable: false
   }
 )
 
 ///////////////////////////////////////////////
+
+// // ADD FUNCTION IN STATE IN GLOBAL
+Object.defineProperties(
+  state,
+  {
+    list: {
+      get() {
+        console.info(JSON.parse(JSON.stringify(state)))
+        return
+      },
+      writable: false,
+      configurable: false
+    },
+
+    remove: {
+      value(s: string) {
+        if (s in state) {
+          delete state[s]
+          console.debug(`State '${s}' deleted`)
+        } else {
+          console.error(`'${s}' not exist`)
+        }
+        return
+      },
+      writable: false,
+      configurable: false
+    },
+
+    removeAll: {
+      value() {
+        state.forEach(
+          item => {
+            delete state[item[0]]
+          }
+        )
+        return
+      },
+      writable: false,
+      configurable: false
+    }
+
+  }
+
+)
 
 // END
