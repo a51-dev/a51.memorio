@@ -46,26 +46,26 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
         //   return result
         // }
 
-        // if (prop === 'remove') {
-        //   return function (key: string) {
-        //     if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
-        //       delete target[key]
-        //       return true
-        //     }
-        //     return false
-        //   }
-        // }
+        if (prop === 'remove') {
+          return function (key: string) {
+            if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
+              delete target[key]
+              return true
+            }
+            return false
+          }
+        }
 
-        // if (prop === 'removeAll') {
-        //   return function () {
-        //     for (const key in target) {
-        //       if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
-        //         delete target[key]
-        //       }
-        //     }
-        //     return true
-        //   }
-        // }
+        if (prop === 'removeAll') {
+          return function () {
+            for (const key in target) {
+              if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+                delete target[key]
+              }
+            }
+            return true
+          }
+        }
 
         if (Object.isFrozen(target[prop])) return target[prop]
 
@@ -196,51 +196,5 @@ Object.defineProperty(
 )
 
 ///////////////////////////////////////////////
-
-// ADD FUNCTION IN STATE IN GLOBAL
-Object.defineProperties(
-  state,
-  {
-    list: {
-      get() {
-        const clone = JSON.parse(JSON.stringify(state))
-        console.info(clone)
-        return
-      },
-      writable: false,
-      configurable: false
-    },
-
-    remove: {
-      value(s: string) {
-        if (s in state) {
-          delete state[s]
-          console.debug(`State '${s}' deleted`)
-        } else {
-          console.error(`'${s}' not exist`)
-        }
-        return
-      },
-      writable: false,
-      configurable: false
-    },
-
-    removeAll: {
-      value() {
-        state.forEach(
-          item => {
-            delete state[item[0]]
-          }
-        )
-        return
-      },
-      writable: false,
-      configurable: false
-    }
-
-  }
-
-)
-
 
 // END
