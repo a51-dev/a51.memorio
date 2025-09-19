@@ -68,7 +68,8 @@ observer = (s, cb = null, option = true) => {
       return
     }
 
-    globalThis.memorio.dispatch.listen(s, cb, option)
+    const t = s.replaceAll(".", "-")
+    globalThis.memorio.dispatch.listen(t, cb, option)
     return
   }
 }
