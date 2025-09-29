@@ -14,9 +14,6 @@
 ![ESLint](https://img.shields.io/badge/ESLint-gray?logo=eslint)
 ![esbuild](https://img.shields.io/badge/esbuild-gray?logo=esbuild)
 
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
-![Coverage](https://img.shields.io/badge/coverage-25%20passed-success)
-
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Table of Contents
