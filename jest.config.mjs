@@ -8,6 +8,13 @@ export default {
       useESM: true
     }]
   },
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/dist/",
+    "<rootDir>/.private/",
+    "<rootDir>/*old/",
+    "<rootDir>/*OLD/"
+  ],
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'

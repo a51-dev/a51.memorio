@@ -4,6 +4,7 @@ import { buildProxy } from '../functions/state/index.js'
 import '../init'
 
 describe('State Management', () => {
+
   beforeEach(() => {
     // Reset state by creating a new proxy
     globalThis.state = buildProxy({}, () => { })
@@ -23,9 +24,9 @@ describe('State Management', () => {
   })
 
   test('should remove state', () => {
-    state.test = 'value'
-    state.remove('test')
-    expect(state.test).toBeUndefined()
+    state.t = 'value'
+    state.remove('t')
+    expect(state.t).toBeUndefined()
   })
 
   test('should remove all states', () => {

@@ -45,7 +45,8 @@
     "index.d.ts",
     "./types/memorio.d.ts",
     "./**/*.ts",
-    "./**/*.tsx"
+    "./**/*.tsx",
+    ".private/.old/observer.test.ts"
   ],
   "types": [
     "node"

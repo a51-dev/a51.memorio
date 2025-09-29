@@ -36,34 +36,31 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
       get(target: any, prop: any) {
         // Handle special methods first
 
-        // if (prop === 'list') {
-        //   const result = {}
-        //   for (const key in target) {
-        //     if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
-        //       result[key] = target[key]
-        //     }
-        //   }
-        //   return result
-        // }
+        if (prop === 'list') {
+          console.log('Some state could be hidden when you use "state.list". Use "state" to see the complete list ')
+          return JSON.parse(JSON.stringify(state))
+        }
 
         if (prop === 'remove') {
           return function (key: string) {
-            if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
-              delete target[key]
-              return true
-            }
-            return false
+            delete target[key]
+            return true
           }
         }
 
         if (prop === 'removeAll') {
           return function () {
-            for (const key in target) {
-              if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
-                delete target[key]
+            try {
+              for (const key in target) {
+                if (typeof target[key] !== 'function' && !['list', 'remove', 'removeAll'].includes(key)) {
+                  if (!Object.isFrozen(target[key])) delete target[key]
+                  delete target[key]
+                }
               }
+            } catch (error) {
+              console.error(error)
             }
-            return true
+            return
           }
         }
 
@@ -82,16 +79,25 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
 
       },
 
-      set(target: any, prop: string, value: any): boolean {
+      set(target: any, key: string, value: any): boolean {
 
-        if (target[prop] && typeof target[prop] === 'object' && Object.isFrozen(target[prop])) {
-          console.error(`Error: state '${prop}' is locked`)
+        // PROTECTED
+        if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
+          console.error('key ' + key + ' is protected')
           return
         }
 
+        // FREEZED
+        if (target[key] && typeof target[key] === 'object' && Object.isFrozen(target[key])) {
+          console.error(`Error: state '${key}' is locked`)
+          return
+        }
+
+        // ALLOWED SET
+
         try {
 
-          const path = globalThis.memorio.objPath(prop as string, tree)
+          const path = globalThis.memorio.objPath(key as string, tree)
 
           callback(
             {
@@ -99,25 +105,25 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
               path,
               target,
               newValue: value,
-              previousValue: Reflect.get(target, prop)
+              previousValue: Reflect.get(target, key)
             }
           )
 
           event('state.' + path)
 
-          Reflect.set(target, prop, value)
+          Reflect.set(target, key, value)
 
           // DEFINE LOCK PROPERTY FUNCTION
-          if (target[prop] && typeof target[prop] === 'object') {
+          if (target[key] && typeof target[key] === 'object') {
 
             Reflect.defineProperty(
-              target[prop],
+              target[key],
               'lock',
               {
                 value() {
                   Object.defineProperty(
                     target,
-                    prop,
+                    key,
                     {
                       writable: false,
                       enumerable: false
@@ -125,7 +131,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
                     }
                   )
 
-                  Object.freeze(target[prop])
+                  Object.freeze(target[key])
                 }
               }
             )

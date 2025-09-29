@@ -1,0 +1,15 @@
+{
+  "name": "tools",
+  "scripts": {
+    "backup": "cd backup && backup.bat",
+    "update": "cd shell && bash update.sh",
+    "clear": "cd .. && rm -rf node_modules & npm run update",
+    "------------": "",
+    "fix": "cd .. && npm pkg fix",
+    "audit-fix": "cd .. && npm audit fix",
+    "tsc": "tsc -b ../",
+    "eslint": "eslint . ../",
+    "-----------": "",
+    "svg:optimize": "cd node && node optimizeSVG.js"
+  }
+}

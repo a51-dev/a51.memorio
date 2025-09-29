@@ -45,4 +45,4 @@ globalThis.store = {
   size: jest.fn(() => 0)
 }
 globalThis.cache = {}
-globalThis.observer = jest.fn()
+// globalThis.observer = jest.fn()
