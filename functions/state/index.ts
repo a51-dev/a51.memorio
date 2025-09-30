@@ -84,15 +84,15 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
       set(target: any, key: string, value: any): boolean {
 
         // PROTECTED
-        if (key in target && protect.includes(key)) {
+        if (protect.includes(key)) {
           console.error('key ' + key + ' is protected')
-          return
+          return false
         }
 
         // FREEZED
         if (target[key] && typeof target[key] === 'object' && Object.isFrozen(target[key])) {
           console.error(`Error: state '${key}' is locked`)
-          return
+          return false
         }
 
         // ALLOWED SET
@@ -145,7 +145,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
         } catch (error) {
 
           console.error('Error in set trap:', error)
-          return false
+          return
 
         }
 
@@ -158,7 +158,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
           return Reflect.deleteProperty(target, prop)
         } catch (error) {
           console.error('Error in deleteProperty trap:', error)
-          return false
+          return
         }
       }
 
