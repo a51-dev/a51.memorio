@@ -34,3 +34,12 @@ Object.defineProperty(
     value: p.version
   }
 )
+
+export const protect = [
+  'list',
+  'state',
+  'store',
+  'observer',
+  'remove',
+  'removeAll'
+]
