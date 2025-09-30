@@ -3,6 +3,7 @@
 
 # custom
 .private
+.profile
 .backup
 
 **/*OLD
