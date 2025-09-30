@@ -1,3 +1,5 @@
+import { protect } from "/config/global.js"
+
 Object.defineProperty(
   memorio,
   'objPath',
@@ -82,7 +84,7 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
       set(target: any, key: string, value: any): boolean {
 
         // PROTECTED
-        if (key in target && !['list', 'remove', 'removeAll'].includes(key)) {
+        if (key in target && protect.includes(key)) {
           console.error('key ' + key + ' is protected')
           return
         }
