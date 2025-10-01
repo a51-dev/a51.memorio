@@ -3,8 +3,7 @@ Object.defineProperty(
   "cache",
   {
     value: new Proxy({}, {}),
-    enumerable: false,
-    configurable: true
+    enumerable: false
   }
 )
 
