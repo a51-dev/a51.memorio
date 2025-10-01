@@ -6,7 +6,6 @@ if (!globalThis.memorio) {
   Object.defineProperty(globalThis, 'memorio', {
     value: {},
     writable: false,
-    configurable: false,
     enumerable: false
   })
 }
