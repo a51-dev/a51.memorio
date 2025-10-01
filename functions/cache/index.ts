@@ -4,7 +4,7 @@ Object.defineProperty(
   {
     value: new Proxy({}, {}),
     enumerable: false,
-    configurable: false
+    configurable: true
   }
 )
 
