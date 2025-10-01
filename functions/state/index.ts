@@ -1,21 +1,17 @@
 import { protect } from "../../config/global.js"
 
-if (!Object.getOwnPropertyDescriptor(memorio, 'objPath')) {
-
-  Object.defineProperty(
-    memorio,
-    'objPath',
-    {
-      // configurable: true,
-      writable: false,
-      enumerable: false,
-      value: (prop: string, object: string[], separator: string = '.'): string => {
-        return object.concat(prop).join(separator)
-      }
+Object.defineProperty(
+  memorio,
+  'objPath',
+  {
+    // configurable: true,
+    writable: false,
+    enumerable: false,
+    value: (prop: string, object: string[], separator: string = '.'): string => {
+      return object.concat(prop).join(separator)
     }
-  )
-
-}
+  }
+)
 
 /////////////////////////////////////////////////////
 
@@ -197,18 +193,14 @@ setInterval(
 ///////////////////////////////////////////////
 
 // DEFINE THE STATE IN GLOBAL
-if (!Object.getOwnPropertyDescriptor(globalThis, 'state')) {
-
-  Object.defineProperty(
-    globalThis,
-    'state',
-    {
-      enumerable: false,
-      configurable: true
-    }
-  )
-
-}
+Object.defineProperty(
+  globalThis,
+  'state',
+  {
+    enumerable: false,
+    configurable: true
+  }
+)
 
 ///////////////////////////////////////////////
 
