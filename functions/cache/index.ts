@@ -1,11 +1,10 @@
-
 Object.defineProperty(
-  globalThis,
+  window,
   "cache",
   {
     value: new Proxy({}, {}),
     enumerable: false,
-    configurable: true
+    configurable: false
   }
 )
 
@@ -17,4 +16,4 @@ Object.defineProperty(
 //   }
 // )
 
-Object.freeze(cache)
+export { }
