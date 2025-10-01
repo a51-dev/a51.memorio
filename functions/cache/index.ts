@@ -1,18 +1,23 @@
-Object.defineProperty(
-  window,
-  "cache",
-  {
-    value: new Proxy({}, {}),
-    enumerable: false
-  }
-)
+if (!Object.getOwnPropertyDescriptor(globalThis, 'cache')) {
 
-// Object.defineProperties(
-//   cache,
-//   {
-//     get: {},
-//     set: {}
-//   }
-// )
+  Object.defineProperty(
+    globalThis,
+    "cache",
+    {
+      value: new Proxy({}, {}),
+      enumerable: false,
+      configurable: true
+    }
+  )
 
-export { }
+  // Object.defineProperties(
+  //   cache,
+  //   {
+  //     get: {},
+  //     set: {}
+  //   }
+  // )
+
+  Object.freeze(cache)
+
+}

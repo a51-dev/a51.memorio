@@ -5,6 +5,8 @@ import '../init'
 describe('Store Tests', () => {
   let mockStore = {}
 
+  console.log(store)
+
   beforeEach(() => {
     mockStore = {}
     localStorage.clear()
