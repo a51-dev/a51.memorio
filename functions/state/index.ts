@@ -1,4 +1,4 @@
-import { protect } from "/config/global.js"
+import { protect } from "../../config/global.js"
 
 Object.defineProperty(
   memorio,
@@ -198,8 +198,7 @@ Object.defineProperty(
   globalThis,
   'state',
   {
-    enumerable: false,
-    configurable: true
+    enumerable: false
   }
 )
 
