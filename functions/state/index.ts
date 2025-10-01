@@ -1,17 +1,21 @@
 import { protect } from "../../config/global.js"
 
-Object.defineProperty(
-  memorio,
-  'objPath',
-  {
-    writable: false,
-    configurable: true,
-    enumerable: false,
-    value: (prop: string, object: string[], separator: string = '.'): string => {
-      return object.concat(prop).join(separator)
+if (!Object.getOwnPropertyDescriptor(memorio, 'objPath')) {
+
+  Object.defineProperty(
+    memorio,
+    'objPath',
+    {
+      // configurable: true,
+      writable: false,
+      enumerable: false,
+      value: (prop: string, object: string[], separator: string = '.'): string => {
+        return object.concat(prop).join(separator)
+      }
     }
-  }
-)
+  )
+
+}
 
 /////////////////////////////////////////////////////
 
@@ -129,7 +133,6 @@ export const buildProxy = (obj: Record<string, any>, callback: (props: any) => v
                     {
                       writable: false,
                       enumerable: false
-                      // configurable: false
                     }
                   )
 
@@ -194,13 +197,18 @@ setInterval(
 ///////////////////////////////////////////////
 
 // DEFINE THE STATE IN GLOBAL
-Object.defineProperty(
-  globalThis,
-  'state',
-  {
-    enumerable: false
-  }
-)
+if (!Object.getOwnPropertyDescriptor(globalThis, 'state')) {
+
+  Object.defineProperty(
+    globalThis,
+    'state',
+    {
+      enumerable: false,
+      configurable: true
+    }
+  )
+
+}
 
 ///////////////////////////////////////////////
 
