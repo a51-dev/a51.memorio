@@ -3,7 +3,6 @@ Object.defineProperty(
   'dispatch',
   {
     writable: false,
-    configurable: false,
     enumerable: false,
     value: {
 
