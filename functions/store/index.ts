@@ -4,8 +4,7 @@ Object.defineProperty(
   'store',
   {
     value: new Proxy({}, {}),
-    enumerable: false,
-    configurable: true
+    enumerable: false
   }
 )
 
@@ -22,7 +21,7 @@ Object.defineProperties(
         } catch (err) {
           console.error(`Error parsing store item '${name}':`, err)
         }
-        return
+        return null
       }
     },
 
@@ -30,13 +29,17 @@ Object.defineProperties(
       value(name: string, value: any) {
         if (!name) return
         try {
+
           if (value === null || value === undefined) localStorage.setItem(name, JSON.stringify(null))
           else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') localStorage.setItem(name, JSON.stringify(value))
           else if (typeof value === 'function') console.error('It\'s not secure to store functions.')
+
         } catch (err) {
+
           console.error(`Error setting store item '${name}':`, err)
+
         }
-        return
+        return null
       }
     },
 
@@ -47,15 +50,16 @@ Object.defineProperties(
           localStorage.removeItem(name)
           return true
         }
-        return
+        return false
       }
     },
 
     delete: {
       value(name: string) {
         store.remove(name)
-        return
+        return true
       }
+
     },
 
     removeAll: {
@@ -79,6 +83,7 @@ Object.defineProperties(
             .then(
               ({ usage, quota }) => {
                 if (usage && quota) console.debug(`Using ${usage / 1024} out of ${quota / 1024} Mb.`)
+                return [usage / 1024, quota / 1024]
               }
             )
             .catch(err => { console.error('Error estimating quota:', err) })
@@ -93,9 +98,7 @@ Object.defineProperties(
         for (const key in localStorage) {
           if (localStorage.hasOwnProperty(key)) {
             const item = localStorage.getItem(key)
-            if (item) {
-              totalSize += item.length
-            }
+            if (item) totalSize += item.length
           }
         }
         return totalSize
