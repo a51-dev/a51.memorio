@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from '@jest/globals'
-import '../config/global.js'
 import { buildProxy } from '../functions/state/index.js'
+import '../config/global.js'
 import '../init'
 
 describe('State Management', () => {
