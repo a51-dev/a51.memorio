@@ -4,8 +4,7 @@ Object.defineProperty(
   globalThis,
   'observer',
   {
-    enumerable: false,
-    configurable: true
+    enumerable: false
   }
 )
 
@@ -15,16 +14,21 @@ Object.defineProperty(
 observer = (s, cb = null, option = true) => {
 
   // CHECK IF 'STATE.' OR 'STORE.' EXIST
-  const checkStateOrStore = (s: string) => {
-    const t = s.split('.')
-    if (t[0] !== 'state') {
-      console.error(`Observer Error: You need to declare 'state.' or 'store.'. The '${s}' string is incorrect!`)
-      return false
+  try {
+    const checkStateOrStore = (s: string) => {
+      const t = s.split('.')
+      if (t[0] !== 'state') {
+        console.error(`Observer Error: You need to declare 'state.' or 'store.'. The '${s}' string is incorrect!`)
+        return false
+      }
+      return true
     }
-    return true
-  }
 
-  if (!checkStateOrStore(s)) return
+    if (!checkStateOrStore(s)) return
+  } catch (error) {
+    console.error(error)
+    return
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -68,8 +72,7 @@ observer = (s, cb = null, option = true) => {
       return
     }
 
-    const t = s.replaceAll(".", "-")
-    globalThis.memorio.dispatch.listen(t, cb, option)
+    globalThis.memorio.dispatch.listen(s, cb, option)
     return
   }
 }
