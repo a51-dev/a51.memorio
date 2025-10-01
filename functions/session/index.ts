@@ -4,8 +4,7 @@ Object.defineProperty(
   'session',
   {
     value: new Proxy({}, {}),
-    enumerable: false,
-    configurable: true
+    enumerable: false
   }
 )
 
@@ -30,11 +29,15 @@ Object.defineProperties(
       value(name: string, value: any) {
         if (!name) return
         try {
+
           if (value === null || value === undefined) sessionStorage.setItem(name, JSON.stringify(null))
           else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') sessionStorage.setItem(name, JSON.stringify(value))
           else if (typeof value === 'function') console.error('It\'s not secure to session functions.')
+
         } catch (err) {
+
           console.error(`Error setting session item '${name}':`, err)
+
         }
         return
       }
