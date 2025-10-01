@@ -19,7 +19,6 @@ Object.defineProperty(
   {
     value: {},
     writable: true,
-    configurable: false,
     enumerable: false
   }
 )
@@ -29,7 +28,6 @@ Object.defineProperty(
   'version',
   {
     writable: false,
-    configurable: false,
     enumerable: false,
     value: p.version
   }
