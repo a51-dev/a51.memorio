@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2022",
+      "es2024",
       "dom"
     ],
     "module": "NodeNext",
@@ -31,7 +31,7 @@
     "moduleDetection": "force",
     "baseUrl": ".",
     "outDir": "./dist/",
-    "target": "es2022",
+    "target": "es2024",
     "rootDirs": [
       "./"
     ],
