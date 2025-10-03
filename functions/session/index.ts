@@ -1,116 +1,112 @@
-if (!Object.getOwnPropertyDescriptor(globalThis, 'session')) {
+Object.defineProperty(
+  globalThis,
+  'session',
+  {
+    value: new Proxy({}, {}),
+    enumerable: false,
+    configurable: true
+  }
+)
 
-  Object.defineProperty(
-    globalThis,
-    'session',
-    {
-      value: new Proxy({}, {}),
-      enumerable: false,
-      configurable: true
-    }
-  )
-
-  Object.defineProperties(
-    session,
-    {
-      get: {
-        value(name: string) {
-          if (!name) return
-          try {
-            const item = sessionStorage.getItem(name)
-            if (item) return JSON.parse(item)
-            return item
-          } catch (err) {
-            console.error(`Error parsing session item '${name}':`, err)
-          }
-          return
+Object.defineProperties(
+  session,
+  {
+    get: {
+      value(name: string) {
+        if (!name) return
+        try {
+          const item = sessionStorage.getItem(name)
+          if (item) return JSON.parse(item)
+          return item
+        } catch (err) {
+          console.error(`Error parsing session item '${name}':`, err)
         }
-      },
+        return
+      }
+    },
 
-      set: {
-        value(name: string, value: any) {
-          if (!name) return
-          try {
+    set: {
+      value(name: string, value: any) {
+        if (!name) return
+        try {
 
-            if (value === null || value === undefined) sessionStorage.setItem(name, JSON.stringify(null))
-            else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') sessionStorage.setItem(name, JSON.stringify(value))
-            else if (typeof value === 'function') console.error('It\'s not secure to session functions.')
+          if (value === null || value === undefined) sessionStorage.setItem(name, JSON.stringify(null))
+          else if (typeof value === 'object' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string') sessionStorage.setItem(name, JSON.stringify(value))
+          else if (typeof value === 'function') console.error('It\'s not secure to session functions.')
 
-          } catch (err) {
+        } catch (err) {
 
-            console.error(`Error setting session item '${name}':`, err)
+          console.error(`Error setting session item '${name}':`, err)
 
-          }
-          return
         }
-      },
+        return
+      }
+    },
 
-      remove: {
-        value(name: string) {
-          if (!name) return
-          if (sessionStorage.getItem(name)) {
-            sessionStorage.removeItem(name)
-            return true
-          }
-          return
-        }
-      },
-
-      delete: {
-        value(name: string) {
-          session.remove(name)
+    remove: {
+      value(name: string) {
+        if (!name) return
+        if (sessionStorage.getItem(name)) {
+          sessionStorage.removeItem(name)
           return true
         }
+        return
+      }
+    },
 
-      },
-
-      removeAll: {
-        value() {
-          sessionStorage.clear()
-          return true
-        }
-      },
-
-      clearAll: {
-        value() {
-          session.removeAll()
-          return true
-        }
-      },
-
-      quota: {
-        value() {
-          if ('storage' in navigator && 'estimate' in navigator.storage) {
-            navigator.storage.estimate()
-              .then(
-                ({ usage, quota }) => {
-                  if (usage && quota) console.debug(`Using ${usage / 1024} out of ${quota / 1024} Mb.`)
-                }
-              )
-              .catch(err => { console.error('Error estimating quota:', err) })
-          }
-          return
-        }
-      },
-
-      size: {
-        value() {
-          let totalSize = 0
-          for (const key in sessionStorage) {
-            if (sessionStorage.hasOwnProperty(key)) {
-              const item = sessionStorage.getItem(key)
-              if (item) {
-                totalSize += item.length
-              }
-            }
-          }
-          return totalSize
-        }
+    delete: {
+      value(name: string) {
+        session.remove(name)
+        return true
       }
 
+    },
+
+    removeAll: {
+      value() {
+        sessionStorage.clear()
+        return true
+      }
+    },
+
+    clearAll: {
+      value() {
+        session.removeAll()
+        return true
+      }
+    },
+
+    quota: {
+      value() {
+        if ('storage' in navigator && 'estimate' in navigator.storage) {
+          navigator.storage.estimate()
+            .then(
+              ({ usage, quota }) => {
+                if (usage && quota) console.debug(`Using ${usage / 1024} out of ${quota / 1024} Mb.`)
+              }
+            )
+            .catch(err => { console.error('Error estimating quota:', err) })
+        }
+        return
+      }
+    },
+
+    size: {
+      value() {
+        let totalSize = 0
+        for (const key in sessionStorage) {
+          if (sessionStorage.hasOwnProperty(key)) {
+            const item = sessionStorage.getItem(key)
+            if (item) {
+              totalSize += item.length
+            }
+          }
+        }
+        return totalSize
+      }
     }
-  )
 
-  Object.freeze(session)
+  }
+)
 
-}
+Object.freeze(session)
